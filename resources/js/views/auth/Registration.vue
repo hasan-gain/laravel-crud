@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-green-500 p-1">Registration</div>
+    <div class="bg-blue-500 p-1">Registration</div>
 </template>
 
 <script setup>

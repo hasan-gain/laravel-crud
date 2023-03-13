@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Client</title>
+    @vite('resources/css/app.css')
 </head>
 <body>
-    <div>Home page</div>
+    <div class="bg-red-500">Home page</div>
 </body>
 </html>
