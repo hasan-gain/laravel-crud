@@ -1,14 +1,22 @@
 import {createRouter, createWebHistory} from 'vue-router'
 
-import Home from '../views/Home.vue'
+import Default from '../layouts/Default.vue'
 import NotFound from '../views/Error.vue'
 
-export default createRouter({
+// module
+import dashboard from "./dashboard"
+import auth from "./auth"
+
+const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/',
-            component: Home
+            path: '/app',
+            component: Default,
+            children: [
+                {...dashboard},
+                {...auth},
+            ]
         },
         {
             path: '/:pathMatch(.*)*',
@@ -19,3 +27,9 @@ export default createRouter({
         }
     ]
 })
+
+router.afterEach((to, from, next) => {
+    document.title = `${to.meta.title || 'App'}`
+})
+
+export default router;

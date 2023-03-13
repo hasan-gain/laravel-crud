@@ -1,5 +1,5 @@
 <template>
-    <div>Home from vue</div>
+    <div>Dashboard</div>
 </template>
 
 <script setup>

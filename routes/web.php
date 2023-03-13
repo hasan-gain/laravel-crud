@@ -17,10 +17,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::group(['prefix' => 'app'], function () {
-    Route::get('/{any?}', function () {
-        return view('app');
-    })->where('any', '.*');
-});
 
+// only for vue
+Route::view('app/{opt?}', 'app')->where('opt', '.*');
 
