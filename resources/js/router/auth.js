@@ -10,7 +10,7 @@ export default {
     children: [
         {
             path: 'login',
-            name: 'dashboard',
+            name: 'login',
             component: Login,
             meta: {
                 title: 'Login',

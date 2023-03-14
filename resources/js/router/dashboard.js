@@ -18,7 +18,8 @@ export default {
             meta: {
                 title: 'Dashboard',
                 middleware: [],
-                breadcrumbs: []
+                breadcrumbs: [],
+                requiredAuth: true
             }
         }
     ]

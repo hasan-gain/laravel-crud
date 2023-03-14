@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::get('/test', function (){
-    return 'test';
-});
 
 Route::controller(AuthController::class)->group(function(){
     Route::post('register', 'register');
@@ -25,5 +22,8 @@ Route::controller(AuthController::class)->group(function(){
 });
 
 Route::middleware('auth:sanctum')->group( function () {
+    Route::get('/me', function (){
+        return auth()->user();
+    });
     Route::apiResource('users', UserController::class);
 });

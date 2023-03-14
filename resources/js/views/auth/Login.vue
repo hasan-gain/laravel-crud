@@ -24,18 +24,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import http from '../../tools/http'
-const loading = ref(false)
-
+import { useAuthStore } from '../../store/auth'
+import { storeToRefs } from 'pinia'
+const authStore = useAuthStore()
+const { loading } = storeToRefs(authStore)
 const submit = (event) => {
-    loading.value = true
-    let formData = new FormData(event.target)
-    http.post('/login', formData).then(res => { }).catch(err => {
-        console.log(err);
-    }).finally(() => {
-        loading.value = false
-    })
+    authStore.Login(event)
 }
 </script>
 
