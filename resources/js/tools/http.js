@@ -1,11 +1,13 @@
 import axios from 'axios'
 
+import router from '../router'
+
 const instance = axios.create({
-  baseURL: '/api',
-  // timeout: 1000,
-  headers: {
-    'Accept': 'application/json'
-  }
+    baseURL: '/api',
+    // timeout: 1000,
+    headers: {
+        'Accept': 'application/json'
+    }
 });
 
 const getCSRF = () => {
@@ -15,7 +17,7 @@ const getCSRF = () => {
 // Add a request interceptor
 instance.interceptors.request.use(function (config) {
     if (localStorage.token) {
-        config.headers = {...config.headers, 'Authorization': `Bearer ${localStorage.token}`, 'X-CSRF-TOKEN': getCSRF()}
+        config.headers = { ...config.headers, 'Authorization': `Bearer ${localStorage.token}`, 'X-CSRF-TOKEN': getCSRF() }
     }
     // Do something before request is sent
     return config;
@@ -35,9 +37,6 @@ instance.interceptors.response.use(function (response) {
 
     if (error.response.status === 401) {
         localStorage.removeItem('token')
-        localStorage.removeItem('user')
-        const store = useAuthStore()
-        store.updateAuthStore();
         router.push({ name: 'login' })
     }
 

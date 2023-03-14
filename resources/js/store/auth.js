@@ -41,7 +41,8 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     const Logout = () => {
-        console.log('logout');
+        localStorage.removeItem('token')
+        router.push({ name: 'login' })
     }
 
     const Registration = (data) => {
