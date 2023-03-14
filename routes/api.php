@@ -23,6 +23,6 @@ Route::controller(AuthController::class)->group(function(){
 
 Route::middleware('auth:sanctum')->group( function () {
     Route::get('me', [UserController::class, 'me']);
-    Route::apiResource('users', UserController::class);
+//    Route::apiResource('users', UserController::class);
     Route::apiResource('posts', PostController::class);
 });
