@@ -14,5 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('home');
+
+
+// only for vue
+Route::view('app/{opt?}', 'app')->where('opt', '.*');
+
