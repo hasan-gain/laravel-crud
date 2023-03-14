@@ -5,6 +5,7 @@ import NotFound from '../views/Error.vue'
 
 // module
 import dashboard from "./dashboard"
+import userCrud from "./userCrud"
 import auth from "./auth"
 
 const router = createRouter({
@@ -15,6 +16,7 @@ const router = createRouter({
             component: Default,
             children: [
                 {...dashboard},
+                {...userCrud},
                 {...auth},
             ]
         },
