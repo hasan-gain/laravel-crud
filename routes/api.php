@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +22,7 @@ Route::controller(AuthController::class)->group(function(){
 });
 
 Route::middleware('auth:sanctum')->group( function () {
-    Route::get('/me', function (){
-        return auth()->user();
-    });
-    Route::apiResource('users', UserController::class);
+    Route::get('me', [UserController::class, 'me']);
+//    Route::apiResource('users', UserController::class);
+    Route::apiResource('posts', PostController::class);
 });
