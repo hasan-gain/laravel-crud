@@ -12,8 +12,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Post::paginate(10);
+        $post = Post::with('user:id,name')->paginate(10);
         return successResponse([], $post);
+
+//        $title = \request()->title;
+//        $post = Post::query();
+//        if ($title){
+//            $post->where('title', 'LIKE', '%'.$title.'%');
+//        }
+//        return paginateResponse($post->latest(), PostResource::class, 'posts');
     }
 
     /**
