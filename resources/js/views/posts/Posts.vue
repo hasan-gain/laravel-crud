@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, onMounted, ref} from "vue";
+import { computed, onMounted, ref } from "vue";
 import http from '../../tools/http';
 
 const createPost = (): void => {
@@ -25,7 +25,7 @@ const getPrevPageData = (): void => {
     fetchPostsData();
 }
 const fetchPostsData = (): void => {
-    http.get(`/posts?page=${page.value}`).then(({data}) => {
+    http.get(`/posts?page=${page.value}`).then(({ data }) => {
         lastPage.value = data.data.last_page;
         posts.value = data.data.data;
     }).catch(err => {
@@ -34,8 +34,8 @@ const fetchPostsData = (): void => {
 }
 
 const fetchSinglePostData = (id: number): void => {
-    http.get(`/posts/${id}`).then(({data: editData}) => {
-        const {title, content} = editData;
+    http.get(`/posts/${id}`).then(({ data: editData }) => {
+        const { title, content } = editData;
         formData.value.title = title;
         formData.value.content = content;
     }).catch(err => {
@@ -105,7 +105,7 @@ const openEditModal = (postId: number): void => {
 const closeEditModal = (): void => {
     showEditModal.value = false;
     postToEditId.value = 0;
-    formData.value = {title: '', content: ''};
+    formData.value = { title: '', content: '' };
 }
 
 
@@ -119,17 +119,19 @@ const closeDeleteModal = (): void => {
     postToDeleteId.value = 0;
 }
 
-const formData = ref<Post>({title: '', content: ''});
+const formData = ref<Post>({ title: '', content: '' });
 </script>
 
 <template>
     <div>
-        <!-- The button to open modal -->
-        <!-- The button to open modal -->
-        <label for="my-modal" class="btn btn-primary">Add post</label>
-
+        <div class="flex justify-between items-center mb-2">
+            <h3 class=" text-2xl">All Posts</h3>
+            <!-- The button to open modal -->
+            <label for="my-modal" class="btn btn-sm">Add Post</label>
+        </div>
+        <hr>
         <!-- Put this part before </body> tag -->
-        <input type="checkbox" id="my-modal" class="modal-toggle"/>
+        <input type="checkbox" id="my-modal" class="modal-toggle" />
         <div class="modal">
             <div class="modal-box">
                 <h3 class="font-bold text-lg">Create post</h3>
@@ -139,17 +141,18 @@ const formData = ref<Post>({title: '', content: ''});
                         <span class="label-text">title</span>
                     </label>
                     <input type="text" placeholder="Enter title" class="input input-bordered w-full max-w-xs"
-                           v-model="postTitle"/>
+                        v-model="postTitle" />
 
                     <label class="label">
                         <span class="label-text">Content</span>
                     </label>
                     <textarea class="textarea textarea-bordered h-24" placeholder="Enter content"
-                              v-model="postContent"></textarea>
+                        v-model="postContent"></textarea>
                 </div>
 
                 <div class="modal-action">
-                    <label for="my-modal" :class="`btn btn-primary ${!Boolean(postTitle && postContent) ? 'btn-disabled' : ''}`" @click="createPost" >Create</label>
+                    <label for="my-modal" :class="`btn ${!Boolean(postTitle && postContent) ? 'btn-disabled' : ''}`"
+                        @click="createPost">Create</label>
                     <label for="my-modal" class="btn">Cancel</label>
                 </div>
             </div>
@@ -164,17 +167,18 @@ const formData = ref<Post>({title: '', content: ''});
                         <span class="label-text">title</span>
                     </label>
                     <input type="text" placeholder="Enter title" class="input input-bordered w-full max-w-xs"
-                           v-model="formData.title"/>
+                        v-model="formData.title" />
 
                     <label class="label">
                         <span class="label-text">Content</span>
                     </label>
                     <textarea class="textarea textarea-bordered h-24" placeholder="Enter content"
-                              v-model="formData.content"></textarea>
+                        v-model="formData.content"></textarea>
                 </div>
 
                 <div class="modal-action">
-                    <a href="#" @click="editPost" :class="`btn ${!Boolean(formData.title && formData.content) ? 'btn-disabled' : ''}`" >Save</a>
+                    <a href="#" @click="editPost"
+                        :class="`btn ${!Boolean(formData.title && formData.content) ? 'btn-disabled' : ''}`">Save</a>
                     <a href="#" class="btn" @click="closeEditModal">Cancel</a>
                 </div>
 
@@ -196,24 +200,24 @@ const formData = ref<Post>({title: '', content: ''});
             <table class="table table-zebra w-full">
                 <!-- head -->
                 <thead>
-                <tr>
-                    <th v-for="tableKey in tableKeys" :key="tableKey">{{ tableKey }}</th>
-                    <th>
-                        <p>Actions</p>
-                    </th>
-                </tr>
+                    <tr>
+                        <th v-for="tableKey in tableKeys" :key="tableKey">{{ tableKey }}</th>
+                        <th>
+                            <p>Actions</p>
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(post, i) in posts" :key="i">
-                    <td v-for="tableKey in tableKeys">{{ truncate(post[tableKey]) }}</td>
-                    <td>
-                        <div class="btn-group">
-                            <button class="btn btn-xs btn-accent" @click="openEditModal(post.id)">Edit
-                            </button>
-                            <button class="btn btn-xs btn-error" @click="openDelModal(post.id)">Del</button>
-                        </div>
-                    </td>
-                </tr>
+                    <tr v-for="(post, i) in posts" :key="i">
+                        <td v-for="tableKey in tableKeys">{{ truncate(post[tableKey]) }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-xs btn-accent" @click="openEditModal(post.id)">Edit
+                                </button>
+                                <button class="btn btn-xs btn-error" @click="openDelModal(post.id)">Del</button>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -226,6 +230,4 @@ const formData = ref<Post>({title: '', content: ''});
 </template>
 
 
-<style scoped>
-
-</style>
+<style scoped></style>

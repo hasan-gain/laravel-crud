@@ -41,8 +41,15 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     const Logout = () => {
-        localStorage.removeItem('token')
-        router.push({ name: 'login' })
+        http.post('logout')
+            .then(res => {
+                if (res.statusText === 'OK') {
+                    localStorage.removeItem('token')
+                    router.push({ name: 'login' })
+                }
+            })
+            .catch(err => { })
+            .finally(() => { })
     }
 
     const Registration = (data) => {

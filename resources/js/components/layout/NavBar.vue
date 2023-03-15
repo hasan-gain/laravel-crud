@@ -1,6 +1,5 @@
 <template>
-    <div class="bg-base-200 p-3 flex justify-between  items-center">
-        <h1 class="">Admin Panel</h1>
+    <div class="bg-base-200 p-3 flex h-[60px] justify-end items-center">
         <div class="flex gap-2 items-center">
             <label class="swap swap-rotate">
                 <input type="checkbox" :checked="!isDark" @change="toggleDark()" />
