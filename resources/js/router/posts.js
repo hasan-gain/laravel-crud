@@ -1,18 +1,18 @@
 // layout
 import Application from '../layouts/Application.vue'
 // views
-import Users from '../views/users/Users.vue'
+import Posts from '../views/posts/Posts.vue'
 
 export default {
     path: '',
     component: Application,
     children: [
         {
-            path: 'users',
-            name: 'users',
-            component: Users,
+            path: 'posts',
+            name: 'posts',
+            component: Posts,
             meta: {
-                title: 'users',
+                title: 'posts',
                 middleware: [],
                 breadcrumbs: [],
                 requiredAuth: true
