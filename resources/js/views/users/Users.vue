@@ -138,18 +138,18 @@ const formData = ref<Post>({title: '', content: ''});
                     <label class="label">
                         <span class="label-text">title</span>
                     </label>
-                    <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs"
+                    <input type="text" placeholder="Enter title" class="input input-bordered w-full max-w-xs"
                            v-model="postTitle"/>
 
                     <label class="label">
                         <span class="label-text">Content</span>
                     </label>
-                    <textarea class="textarea textarea-bordered h-24" placeholder="Bio"
+                    <textarea class="textarea textarea-bordered h-24" placeholder="Enter content"
                               v-model="postContent"></textarea>
                 </div>
 
                 <div class="modal-action">
-                    <label for="my-modal" class="btn" @click="createPost" >Create</label>
+                    <label for="my-modal" :class="`btn ${!Boolean(postTitle && postContent) ? 'btn-disabled' : ''}`" @click="createPost" >Create</label>
                     <label for="my-modal" class="btn">Cancel</label>
                 </div>
             </div>
@@ -163,18 +163,18 @@ const formData = ref<Post>({title: '', content: ''});
                     <label class="label">
                         <span class="label-text">title</span>
                     </label>
-                    <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs"
+                    <input type="text" placeholder="Enter title" class="input input-bordered w-full max-w-xs"
                            v-model="formData.title"/>
 
                     <label class="label">
                         <span class="label-text">Content</span>
                     </label>
-                    <textarea class="textarea textarea-bordered h-24" placeholder="Bio"
+                    <textarea class="textarea textarea-bordered h-24" placeholder="Enter content"
                               v-model="formData.content"></textarea>
                 </div>
 
                 <div class="modal-action">
-                    <a href="#" :class="`btn`" @click="editPost">Save</a>
+                    <a href="#" @click="editPost" :class="`btn ${!Boolean(formData.title && formData.content) ? 'btn-disabled' : ''}`" >Save</a>
                     <a href="#" class="btn" @click="closeEditModal">Cancel</a>
                 </div>
 
