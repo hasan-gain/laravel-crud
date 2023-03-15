@@ -2,27 +2,39 @@
 import {computed, onMounted, ref} from "vue";
 import http from '../../tools/http';
 
-function createPost(): void {
+const createPost = (): void => {
     http.post(`/posts`, {
         title: postTitle.value,
         content: postContent.value,
-    }).then((data) => {
-        fetchPostsData();
-    }).catch(err => {
-        console.log(err);
-    });
+    })
+        .then(() => fetchPostsData())
+        .catch(err => {
+            console.log(err);
+        });
 }
 
-function fetchPostsData(): void {
-    http.get('/posts').then(({ data }) => {
+const page = ref<number>(1);
+const getNextPageData = (): void => {
+    page.value++;
+    fetchPostsData();
+}
+
+const getPrevPageData = (): void => {
+    page.value--;
+    fetchPostsData();
+}
+const nextPageExists = computed<boolean>(() => Boolean(posts.value.length))
+
+const fetchPostsData = (): void => {
+    http.get(`/posts?page=${page.value}`).then(({data}) => {
         posts.value = data.data.data
     }).catch(err => {
         console.log(err);
     });
 }
 
-function fetchSinglePostData(id: number): void {
-    http.get(`/posts/${id}`).then(({ data: editData }) => {
+const fetchSinglePostData = (id: number): void => {
+    http.get(`/posts/${id}`).then(({data: editData}) => {
         const {title, content} = editData;
         formData.value.title = title;
         formData.value.content = content;
@@ -31,22 +43,22 @@ function fetchSinglePostData(id: number): void {
     });
 }
 
-function editPost(): void {
+const editPost = (): void => {
     http.post(`/posts/${postToEditId.value}`, {
         title: formData.value.title,
         content: formData.value.content,
         _method: 'patch'
     }).then((data) => {
         closeEditModal();
-        formData.value = {title: '', content: ''};
         fetchPostsData();
     }).catch(err => {
         console.log(err);
     });
 }
 
-function deletePost(): void {
-    http.delete(`/posts/${postToDeleteId.value}`).then((data) => {
+const deletePost = (): void => {
+    http.delete(`/posts/${postToDeleteId.value}`).then(() => {
+        closeDeleteModal();
         fetchPostsData();
     }).catch(err => {
         console.log(err);
@@ -63,6 +75,7 @@ onMounted(() => {
 interface Post {
     title: string,
     content: string,
+
     // id: number,
     [propName: string]: any
 }
@@ -76,7 +89,7 @@ const tableKeys = computed<string[] | []>(() => {
 const postTitle = ref<string>('');
 const postContent = ref<string>('');
 
-function truncate(value: string): string {
+const truncate = (value: string): string => {
     const limit = 30;
     if (value.toString().length < limit) return value;
     return value.substring(0, limit) + '...';
@@ -84,31 +97,27 @@ function truncate(value: string): string {
 
 
 const showEditModal = ref<boolean>(false);
-
-function openEditModal(postId: number): void {
+const openEditModal = (postId: number): void => {
     postToEditId.value = postId;
     showEditModal.value = true;
     fetchSinglePostData(postId);
 }
-
-function closeEditModal() {
+const closeEditModal = (): void => {
     showEditModal.value = false;
     postToEditId.value = 0;
+    formData.value = {title: '', content: ''};
 }
 
 
 const showDeleteModal = ref<boolean>(false);
-
-function openDelModal(postId: number, modalClosing: boolean): void {
+const openDelModal = (postId: number): void => {
     postToDeleteId.value = postId;
     showDeleteModal.value = true;
 }
-
-function closeDeleteModal() {
+const closeDeleteModal = (): void => {
     showDeleteModal.value = false;
     postToDeleteId.value = 0;
 }
-
 
 const formData = ref<Post>({title: '', content: ''});
 </script>
@@ -140,7 +149,8 @@ const formData = ref<Post>({title: '', content: ''});
                 </div>
 
                 <div class="modal-action">
-                    <label for="my-modal" class="btn" @click="createPost">Create</label>
+                    <label for="my-modal" class="btn" @click="createPost" >Create</label>
+                    <label for="my-modal" class="btn">Cancel</label>
                 </div>
             </div>
         </div>
@@ -164,7 +174,7 @@ const formData = ref<Post>({title: '', content: ''});
                 </div>
 
                 <div class="modal-action">
-                    <a href="#" class="btn" @click="editPost">Save</a>
+                    <a href="#" :class="`btn`" @click="editPost">Save</a>
                     <a href="#" class="btn" @click="closeEditModal">Cancel</a>
                 </div>
 
@@ -206,6 +216,10 @@ const formData = ref<Post>({title: '', content: ''});
                 </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="btn-group mt-3">
+            <button class="btn btn-outline" v-if="page > 1" @click="getPrevPageData">«</button>
+            <button class="btn btn-outline" v-if="nextPageExists" @click="getNextPageData">»</button>
         </div>
     </div>
 </template>
