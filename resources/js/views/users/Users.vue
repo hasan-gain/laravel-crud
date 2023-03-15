@@ -14,6 +14,7 @@ const createPost = (): void => {
 }
 
 const page = ref<number>(1);
+const lastPage = ref<number>(0);
 const getNextPageData = (): void => {
     page.value++;
     fetchPostsData();
@@ -23,11 +24,10 @@ const getPrevPageData = (): void => {
     page.value--;
     fetchPostsData();
 }
-const nextPageExists = computed<boolean>(() => Boolean(posts.value.length))
-
 const fetchPostsData = (): void => {
     http.get(`/posts?page=${page.value}`).then(({data}) => {
-        posts.value = data.data.data
+        lastPage.value = data.data.last_page;
+        posts.value = data.data.data;
     }).catch(err => {
         console.log(err);
     });
@@ -219,7 +219,7 @@ const formData = ref<Post>({title: '', content: ''});
         </div>
         <div class="btn-group mt-3">
             <button class="btn btn-outline" v-if="page > 1" @click="getPrevPageData">«</button>
-            <button class="btn btn-outline" v-if="nextPageExists" @click="getNextPageData">»</button>
+            <button class="btn btn-outline" v-if="page < lastPage" @click="getNextPageData">»</button>
         </div>
     </div>
 </template>
