@@ -66,4 +66,14 @@ class AuthController extends Controller
         }
         return successResponse('Logged in successfully', $data); //default status 200
     }
+
+    public function logout(Request $request)
+    {
+        try {
+            $request->user()->currentAccessToken()->delete();
+        }catch (\Exception $exception){
+            return errorResponse();
+        }
+        return successResponse('Logout successfully');
+    }
 }
