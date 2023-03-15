@@ -126,7 +126,7 @@ const formData = ref<Post>({title: '', content: ''});
     <div>
         <!-- The button to open modal -->
         <!-- The button to open modal -->
-        <label for="my-modal" class="btn">open modal</label>
+        <label for="my-modal" class="btn btn-primary">Add post</label>
 
         <!-- Put this part before </body> tag -->
         <input type="checkbox" id="my-modal" class="modal-toggle"/>
@@ -149,7 +149,7 @@ const formData = ref<Post>({title: '', content: ''});
                 </div>
 
                 <div class="modal-action">
-                    <label for="my-modal" :class="`btn ${!Boolean(postTitle && postContent) ? 'btn-disabled' : ''}`" @click="createPost" >Create</label>
+                    <label for="my-modal" :class="`btn btn-primary ${!Boolean(postTitle && postContent) ? 'btn-disabled' : ''}`" @click="createPost" >Create</label>
                     <label for="my-modal" class="btn">Cancel</label>
                 </div>
             </div>
@@ -186,7 +186,7 @@ const formData = ref<Post>({title: '', content: ''});
                 <h3 class="font-bold text-lg">Delete post? {{ postToDeleteId }}</h3>
                 <p class="py-4">Delete this post?</p>
                 <div class="modal-action">
-                    <a href="#" class="btn" @click="deletePost">Delete</a>
+                    <a href="#" class="btn btn-error" @click="deletePost">Delete</a>
                     <a href="#" class="btn" @click="closeDeleteModal">Cancel</a>
                 </div>
             </div>
@@ -218,8 +218,9 @@ const formData = ref<Post>({title: '', content: ''});
             </table>
         </div>
         <div class="btn-group mt-3">
-            <button class="btn btn-outline" v-if="page > 1" @click="getPrevPageData">«</button>
-            <button class="btn btn-outline" v-if="page < lastPage" @click="getNextPageData">»</button>
+            <button class="btn" v-if="page > 1"  @click="getPrevPageData">«</button>
+            <button class="btn">Page {{page}}</button>
+            <button class="btn" v-if="page < lastPage" @click="getNextPageData">»</button>
         </div>
     </div>
 </template>
