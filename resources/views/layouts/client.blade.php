@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gain core</title>
     <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js" defer></script>
-    @vite('resources/css/app.css')
+    @vite('resources/sass/core/core.scss')
 </head>
 <body>
     <header class="body-font border-b border-gray-200">
