@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "crud-docs"
+  name: "crud-docs-tofayel"
   text: "Crud documentation"
   tagline: My great project tagline
   actions:

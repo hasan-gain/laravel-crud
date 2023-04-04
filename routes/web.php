@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DocumentationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,4 @@ Route::view('/documents', 'documents')->name('documents');
 
 // only for vue
 Route::view('app/{opt?}', 'app')->where('opt', '.*');
+Route::get('documentation/{opt?}', [DocumentationController::class, 'index']);
