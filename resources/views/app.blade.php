@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,9 +8,10 @@
     <title>Admin</title>
     @vite('resources/sass/core/core.scss')
 </head>
-<body>
-<div id="app"></div>
 
-@vite('resources/js/main.js')
+<body>
+    <div id="app"></div>
+    @vite('resources/script/main.ts')
 </body>
+
 </html>

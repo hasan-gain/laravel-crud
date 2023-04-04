@@ -1,0 +1,22 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "include": ["env.d.ts", "resources/script/**/*", "resources/script/**/*.vue"],
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "ignoreDeprecations": "5.0",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./resources/script/*"]
+    },
+    "lib": [
+      "es2018",
+      "dom"
+  ]
+  },
+
+  "references": [
+    {
+      "path": "./tsconfig.config.json"
+    }
+  ]
+}
