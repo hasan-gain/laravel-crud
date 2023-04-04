@@ -3,8 +3,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "docs:dev": "NODE_ENV=local vitepress dev resources/js/",
-    "docs:build": "NODE_ENV=production vitepress build resources/js/",
+    "docs:dev": "NODE_ENV=local vitepress dev resources/script/",
+    "docs:build": "NODE_ENV=production vitepress build resources/script/",
     "docs:preview": "vitepress preview resources/js/"
   },
   "devDependencies": {
