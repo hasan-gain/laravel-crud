@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "crud-docs-tofayel"
+  name: "crud-docs"
   text: "Crud documentation"
   tagline: My great project tagline
   actions:
@@ -13,7 +13,6 @@ hero:
     - theme: alt
       text: API Examples
       link: /api-examples
-
 
 features:
   - title: Feature A

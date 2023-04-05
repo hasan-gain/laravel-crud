@@ -2,9 +2,9 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  outDir: '../../public/docs',
-  base: process.env.NODE_ENV === 'local' ? '' : '/docs/',
   title: "crud-docs",
+  outDir: '../public/docs',
+  base: process.env.NODE_ENV === 'local' ? '' : '/docs/',
   description: "Crud documentation",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
