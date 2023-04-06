@@ -13,4 +13,4 @@ app.component('Icon', VueFeather)
 
 app.mount("#app")
 
-import 'bootstrap'
+import 'bootstrap' // BS5

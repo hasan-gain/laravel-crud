@@ -4,7 +4,7 @@
             <!--Top Navbar-->
             <nav-bar />
             <!--Sidebar-->
-            <side-bar />
+            <side-bar :data="setting?.sidebar" :logo-src="''" :logo-icon-src="''" :logo-url="'/'" />
             <div class="container-fluid page-body-wrapper">
                 <div class="main-panel">
                     <!--Contents-->
@@ -15,7 +15,7 @@
     </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { onMounted } from 'vue'
 import { useAuthStore } from "../store/auth";
 import { useAppStore } from "../store/application";
@@ -23,10 +23,11 @@ import { useAppStore } from "../store/application";
 // components
 import NavBar from '../components/layout/NavBar.vue';
 import SideBar from '../components/layout/SideBar.vue';
-
+import { storeToRefs } from 'pinia';
+// state
 const authStore = useAuthStore()
 const appStore = useAppStore()
-
+const { setting } = storeToRefs(appStore)
 onMounted(() => {
     appStore.init()
     authStore.init()
