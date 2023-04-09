@@ -7,12 +7,12 @@ const { site, frontmatter } = useData();
 
 <template>
     <div>
-        <aside class="sidebar bg-dark">
+        <aside class="sidebar --bg-dark">
             <div class="logo bg-info">
                 <p class="lead text-white mb-0">LOGO</p>
             </div>
             <div class="sidebar-links-wrapper">
-                <ul class="list-unstyled text-white">
+                <ul class="list-unstyled --text-white">
                     <li class="sidebar-link">Link 1</li>
                     <li class="sidebar-link">Link 2</li>
                     <li class="sidebar-link">Link 3</li>
@@ -22,7 +22,7 @@ const { site, frontmatter } = useData();
                 </ul>
             </div>
         </aside>
-        <nav class="top-bar bg-light w-full">
+        <nav class="top-bar w-full">
             <ul class="list-unstyled d-flex gap-5">
                 <li>Home</li>
                 <li>About</li>
@@ -58,6 +58,7 @@ $content-wrapper-addiotional-margin: 1rem;
 // @media only screen and (min-width: 991px) {
     .sidebar {
         width: $sidebar-width;
+        background: #f5f6fa;
         position: fixed;
         top: 0;
         left: 0;
@@ -75,10 +76,10 @@ $content-wrapper-addiotional-margin: 1rem;
 
             .sidebar-link {
                 padding: 1.5rem 1rem;
-                background: #353a41;
+                // background: #f1f1f1;
 
                 &:nth-child(odd) {
-                    background: #2d3237;
+                    // background: #2d3237;
                 }
             }
         }
@@ -88,6 +89,7 @@ $content-wrapper-addiotional-margin: 1rem;
         height: $topbar-height;
         position: fixed;
         left: $sidebar-width;
+        background: #f5f6fa;
         right: 0;
         top: 0;
         display: grid;
@@ -117,7 +119,7 @@ $content-wrapper-addiotional-margin: 1rem;
 }
 
 .bg-info {
-    background: skyblue;
+    background: #00a8ff;
 }
 
 .bg-light {
