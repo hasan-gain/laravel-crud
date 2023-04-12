@@ -1,8 +1,8 @@
 export interface SidebarMenu {
-    id: string
+    id?: string
     name: string
     icon: string
-    url?: string | undefined
+    url?: string
     subMenu?: SidebarSubMenu[]
     permission: boolean
 }

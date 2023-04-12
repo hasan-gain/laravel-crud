@@ -1,18 +1,19 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import type { SidebarMenu } from '@/types/sidebar'
+import type { Settings } from '@/types/application'
 import { GET_SETTINGS } from '@/api/application'
 
 export const useAppStore = defineStore('app', () => {
     // state
     const leftMenu = ref<string>('')
     const loading = ref<boolean>(false)
-    const setting = reactive<{ sidebar: SidebarMenu[] }>({ sidebar: [] })
+    const settings = reactive<Settings>({ sidebar: [], logo: '', icon: '' })
 
     // methods
-    const init = () => {
+    const init = async () => {
+        loading.value = true
         getSetting()
-        setLeftMenu()
+        await setLeftMenu()
     }
 
     const setLeftMenu = (type: string = localStorage.getItem('sidebar') || 'normal') => {
@@ -35,12 +36,20 @@ export const useAppStore = defineStore('app', () => {
         }
     }
 
-    const getSetting = () => {
-        GET_SETTINGS().then(res => {
-            setting.sidebar = res.sidebar
-        }).catch(err => { })
-            .finally(() => { })
+    const getSetting = async () => {
+        try{
+            let { sidebar, logo, icon } = await GET_SETTINGS().then(res => ({...res}))
+            settings.sidebar = sidebar
+            settings.logo = logo
+            settings.icon = icon
+        }
+        catch(err){
+            console.error(err)
+        }
+        finally{
+            loading.value = false
+        }
     }
 
-    return { init, setLeftMenu, loading, leftMenu, setting }
+    return { init, setLeftMenu, loading, leftMenu, settings }
 })

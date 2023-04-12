@@ -1,10 +1,11 @@
 <template>
-    <div class="drawer drawer-mobile">
+    <div v-if="loading">Loading</div>
+    <div v-else class="drawer drawer-mobile">
         <div class="container-scroller">
             <!--Top Navbar-->
             <nav-bar />
             <!--Sidebar-->
-            <side-bar :data="setting?.sidebar" :logo-src="''" :logo-icon-src="''" :logo-url="'/'" />
+            <side-bar :data="settings.sidebar" :logo-src="settings.logo" :logo-icon-src="settings.icon" :logo-url="'/'" />
             <div class="container-fluid page-body-wrapper">
                 <div class="main-panel">
                     <!--Contents-->
@@ -27,7 +28,7 @@ import { storeToRefs } from 'pinia';
 // state
 const authStore = useAuthStore()
 const appStore = useAppStore()
-const { setting } = storeToRefs(appStore)
+const { settings, loading } = storeToRefs(appStore)
 onMounted(() => {
     appStore.init()
     authStore.init()
