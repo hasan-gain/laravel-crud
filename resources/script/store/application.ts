@@ -7,6 +7,7 @@ export const useAppStore = defineStore('app', () => {
     // state
     const leftMenu = ref<string>('')
     const loading = ref<boolean>(false)
+    const loaded = ref<boolean>(false)
     const settings = reactive<Settings>({ sidebar: [], logo: '', icon: '' })
 
     // methods
@@ -37,19 +38,20 @@ export const useAppStore = defineStore('app', () => {
     }
 
     const getSetting = async () => {
-        try{
-            let { sidebar, logo, icon } = await GET_SETTINGS().then(res => ({...res}))
+        try {
+            let { sidebar, logo, icon } = await GET_SETTINGS().then(res => ({ ...res }))
             settings.sidebar = sidebar
             settings.logo = logo
             settings.icon = icon
+            loaded.value = true
         }
-        catch(err){
+        catch (err) {
             console.error(err)
         }
-        finally{
+        finally {
             loading.value = false
         }
     }
 
-    return { init, setLeftMenu, loading, leftMenu, settings }
+    return { init, setLeftMenu, loading, loaded, leftMenu, settings }
 })
