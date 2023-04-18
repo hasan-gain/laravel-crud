@@ -1,8 +1,9 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import router from '@/router'
+import AjaxList from '@/helper/http/AjaxList'
 
 const onRequest = (config: AxiosRequestConfig): any => {
-    // console.info(`[request] [${JSON.stringify(config)}]`);
+    AjaxList.add(config)
     const getCSRF = () => {
         let element: HTMLElement | null = document.querySelector('meta[name="csrf-token"]')
         return element instanceof HTMLMetaElement ? element.content : ''
@@ -14,17 +15,16 @@ const onRequest = (config: AxiosRequestConfig): any => {
 }
 
 const onRequestError = (error: AxiosError): Promise<AxiosError> => {
-    // console.error(`[request error] [${JSON.stringify(error)}]`);
     return Promise.reject(error);
 }
 
 const onResponse = (response: AxiosResponse): AxiosResponse => {
-    // console.info(`[response] [${JSON.stringify(response)}]`);
+    AjaxList.done(response)
     return response;
 }
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
-    // console.error(`[response error] [${JSON.stringify(error)}]`);
+    AjaxList.done(error)
     if (error.response?.status === 401) {
         localStorage.removeItem('token')
         router.push({ name: 'login' })
