@@ -10,20 +10,20 @@
                         <button class="navbar-toggler align-self-center d-none d-lg-block pl-0" type="button">
                             <span v-if="leftMenu === 'normal'" :key="'align-left'"
                                 @click.prevent="appStore.setLeftMenu('icon-only')" title="collapse_sidebar">
-                                <icon type="align-left" />
+                                <app-icon type="align-left" />
                             </span>
                             <span v-else-if="leftMenu === 'icon-only'" :key="'align-center'"
                                 @click.prevent="appStore.setLeftMenu('floating')" title="floating_sidebar">
-                                <icon type="align-center" />
+                                <app-icon type="align-center" />
                             </span>
                             <span v-else-if="leftMenu === 'floating'" :key="'align-justify'"
                                 @click.prevent="appStore.setLeftMenu('normal')" title="full_sidebar">
-                                <icon type="align-justify" />
+                                <app-icon type="align-justify" />
                             </span>
                         </button>
                         <button class="navbar-toggler align-self-center d-lg-none pl-0" type="button"
                             data-toggle="offcanvas" @click="sidebarOffcanvas">
-                            <icon type="align-left" />
+                            <app-icon type="align-left" />
                         </button>
                         <slot name="left-option"></slot>
                     </div>
@@ -33,28 +33,28 @@
                     <div>
                         <ul class="navbar-nav navbar-nav-right ml-auto">
                             <li class="nav-item">
-                                <button class="navbar-toggler align-self-center" type="button"
-                                    @click="toggleDark()">
+                                <button class="navbar-toggler align-self-center" type="button" @click="toggleDark()">
                                     <span v-if="isDark" :key="'sun'" title="light_mood">
-                                        <icon type="moon"/>
+                                        <app-icon type="moon" />
                                     </span>
                                     <span v-else :key="'moon'" title="dark_mood">
-                                        <icon type="sun"/>
+                                        <app-icon type="sun" />
                                     </span>
                                 </button>
                             </li>
                             <li class="nav-item d-none d-lg-block">
-                                <a v-if="isFullscreen" class="d-flex align-items-center nav-link" href="#"  @click="exit" :key="'maximize'"
-                                    title="exit_fullscreen">
-                                    <icon type="minimize"/>
+                                <a v-if="isFullscreen" class="d-flex align-items-center nav-link" href="#" @click="exit"
+                                    :key="'maximize'" title="exit_fullscreen">
+                                    <app-icon type="minimize" />
                                 </a>
-                                <a v-else class="d-flex align-items-center nav-link" href="#" @click="enter" :key="'minimize'"
-                                    title="fullscreen">
-                                    <icon type="maximize"/>
+                                <a v-else class="d-flex align-items-center nav-link" href="#" @click="enter"
+                                    :key="'minimize'" title="fullscreen">
+                                    <app-icon type="maximize" />
                                 </a>
                             </li>
 
-                            <language-dropdown :selected-language="locale" :data="localesList" @set-local="localeStore.setLocal" />
+                            <language-dropdown :selected-language="locale" :data="localesList"
+                                @set-local="localeStore.setLocal" />
 
                             <!-- <component :is="notificationComponent" :all-notification-url="allNotificationUrl"
                                 :data="notificationData" :show-identifier="showIdentifier" :total-unread="totalUnread"

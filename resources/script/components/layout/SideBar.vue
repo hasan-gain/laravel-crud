@@ -16,14 +16,15 @@
                         :data-bs-toggle="item.id ? 'collapse' : false" :aria-expanded="item.id ? 'false' : false"
                         :aria-controls="item.id ? item.id : false">
                         <span class="icon-wrapper">
-                            <icon :type="item.icon" class="menu-icon" />
+                            <app-icon :type="item.icon" class="menu-icon" />
                         </span>
                         <span class="menu-title">{{ item.name }}</span>
-                        <icon v-if="item.subMenu" class="menu-arrow" type="arrow-down-circle" size="16" />
+                        <app-icon v-if="item.subMenu" class="menu-arrow" type="arrow-down-circle" size="16" />
                     </router-link>
                     <div class="collapse" v-if="item.subMenu" :id="item.id" :class="{ show: isShow(item) }">
                         <ul class="nav flex-column sub-menu">
-                            <template v-for="(submenuItem, index) in item.subMenu" :key="`nav-${navIndex}-submenu-${index}`">
+                            <template v-for="(submenuItem, index) in item.subMenu"
+                                :key="`nav-${navIndex}-submenu-${index}`">
                                 <li class="nav-item" v-if="submenuItem.permission">
                                     <router-link class="nav-link" :to="submenuItem.url" active-class="active">
                                         {{ submenuItem.name }}
@@ -59,8 +60,8 @@ const route = useRoute()
 
 // methods
 const isActive = <boolen>(item: SidebarMenu) => {
-    if(item.subMenu) return item.subMenu.some(sub => sub.url === location.pathname)
-    else return ((item.id ? '#' + item.id : item.url || '') === location.pathname )
+    if (item.subMenu) return item.subMenu.some(sub => sub.url === location.pathname)
+    else return ((item.id ? '#' + item.id : item.url || '') === location.pathname)
 }
 const isShow = <boolen>(item: SidebarMenu) => {
     return !!(item.subMenu?.some(sub => sub.url === location.pathname) && leftMenu.value === 'normal')
@@ -87,7 +88,7 @@ const init = () => {
         })
     })
 
-    sidebar?.addEventListener('mouseleave', (event) => {            
+    sidebar?.addEventListener('mouseleave', (event) => {
         if (leftMenu.value === 'floating') {
             sidebar?.querySelectorAll('.collapse.show').forEach(i => i.classList.remove('show'))
         }
@@ -97,6 +98,6 @@ const init = () => {
 onMounted(() => {
     setTimeout(() => {
         init()
-    })    
+    })
 })
 </script>
