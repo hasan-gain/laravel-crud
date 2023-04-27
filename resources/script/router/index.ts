@@ -1,44 +1,31 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import routes from '@/router/routes'
+import type { Router } from 'vue-router'
+import { useAppStore } from '@/store/application'
 
-import Default from '../layouts/Default.vue'
-import NotFound from '../views/Error.vue'
-
-// module
-import dashboard from "./dashboard"
-import posts from "./posts"
-import auth from "./auth"
-
-const router = createRouter({
+const router: Router = createRouter({
     history: createWebHistory(),
-    routes: [
-        {
-            path: '/app',
-            component: Default,
-            children: [
-                {...dashboard},
-                {...posts},
-                {...auth},
-            ]
-        },
-        {
-            path: '/:pathMatch(.*)*',
-            component: NotFound,
-            meta: {
-                title: 'Page not found | 404'
-            }
-        }
-    ]
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        return { top: 0, behavior: 'smooth' }
+    }
+})
+
+router.beforeResolve(to => {
+    const appStore = useAppStore()
+    return !!(appStore.settings.sidebar.length)
+        ? true
+        : appStore.init().then(settings => true)
 })
 
 router.beforeEach((to, from, next) => {
-    if(to.meta.requiredAuth){
+    if (to.meta.requiredAuth) {
         if (isAuthenticate()) next()
         else next({ name: 'login' })
     }
     else next()
     document.title = `${to.meta.title || 'App'}`
 })
-
 
 let isAuthenticate = () => {
     return !!localStorage.getItem('token')
