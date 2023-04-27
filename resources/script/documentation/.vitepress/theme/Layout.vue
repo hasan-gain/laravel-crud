@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
+import { onMounted } from "vue";
 
 // https://vitepress.dev/reference/runtime-api#usedata
 const { site, frontmatter } = useData();
+const sidebarLinks = site.value.themeConfig.sidebar[0].items;
 </script>
 
 <template>
@@ -13,12 +15,7 @@ const { site, frontmatter } = useData();
             </div>
             <div class="sidebar-links-wrapper">
                 <ul class="list-unstyled --text-white">
-                    <li class="sidebar-link">Link 1</li>
-                    <li class="sidebar-link">Link 2</li>
-                    <li class="sidebar-link">Link 3</li>
-                    <li class="sidebar-link">Link 4</li>
-                    <li class="sidebar-link">Link 5</li>
-                    <li class="sidebar-link">Link 6</li>
+                    <li class="sidebar-link" v-for="value in sidebarLinks">{{ value.text }}</li>
                 </ul>
             </div>
         </aside>
