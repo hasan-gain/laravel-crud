@@ -14,6 +14,6 @@ const app = createApp(App)
 app.use(router)
 app.use(pinia)
 app.use(i18n)
-app.component('Icon', VueFeather)
+app.component('AppIcon', VueFeather)
 
 app.mount("#app")
