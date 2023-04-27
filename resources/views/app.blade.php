@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin</title>
-
-    @vite('resources/css/app.css')
+    @vite('resources/sass/core/core.scss')
 </head>
-<body>
-<div id="app"></div>
 
-@vite('resources/js/main.js')
+<body>
+    <div id="app"></div>
+    @vite('resources/script/main.ts')
 </body>
+
 </html>
