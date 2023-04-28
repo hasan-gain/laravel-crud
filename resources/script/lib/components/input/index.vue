@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { InputOption, InputListItem } from '@/types/component/input'
+import type { InputListItem, InputOption } from '@/types/component/input'
 
 // components
 import TextInput from './TextInput.vue'
@@ -17,24 +17,29 @@ import ImageUploaderInput from './ImageUploaderInput.vue'
 
 interface Props {
     type: 'text' | 'password' | 'email' | 'number' | 'search' | 'radio' | 'select' | 'checkbox' | 'switch' | 'textarea' | 'file' | 'image-uploader'
+    modelValue?: any
     id?: string
+    name?: string,
     autocomplete?: string
-    readOnly?: boolean
+    readonly?: boolean
     disabled?: boolean
     placeholder?: string
     required?: boolean
     inputClass?: string
+    maxlength?: number
+    minlength?: number
     options?: InputOption,
     list?: InputListItem[]
     textAreaCols?: number
     textAreaRows?: number,
-    modelValue?: any,
 }
 
 const props = withDefaults(defineProps<Props>(), {})
 
-const emit = defineEmits(['update:modelValue', 'change'])
+const emit = defineEmits(['update:modelValue', 'change', 'invalid'])
 
+
+// methods
 const textChange = (event: Event): void => {
     const target = event.target as HTMLInputElement
     emit('update:modelValue', target.value)
@@ -51,8 +56,10 @@ const fileChange = (e): void => {
 </script>
 
 <template>
-    <text-input v-if="type === 'text'" :value="modelValue" @update="textChange" />
-    <password-input v-if="type === 'password'" />
+    <text-input v-if="type === 'text'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+        v-bind="$props" />
+    <password-input v-if="type === 'password'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+        v-bind="$props" />
     <email-input v-if="type === 'email'" />
     <number-input v-if="type === 'number'" />
     <search-input v-if="type === 'search'" />
