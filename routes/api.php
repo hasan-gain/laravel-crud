@@ -22,6 +22,7 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('login', 'login');
 });
 Route::apiResource('app-setting', SettingController::class);
+Route::get('languages', [SettingController::class, 'languages']);
 
 Route::middleware('auth:sanctum')->group( function () {
     Route::get('me', [UserController::class, 'me']);
