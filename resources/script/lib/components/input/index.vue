@@ -40,15 +40,29 @@ const props = withDefaults(defineProps<Props>(), {})
 
 const emit = defineEmits(['update:modelValue', 'change', 'invalid'])
 
-
 // methods
 const textChange = (event: Event): void => {
     const target = event.target as HTMLInputElement
+    if (props.type === 'switch') {
+        emit('update:modelValue', Number(target.checked).toString())
+        return
+    }
     emit('update:modelValue', target.value)
     emit('change', target.value)
 }
 
-const listChange = () => { }
+const listChange = (event: Event) => {
+    const target = event.target as HTMLInputElement
+    let values = props.modelValue?.split(',').filter(i => !!i) || []
+    if (values.includes(target.value.trim())) {
+        values = values.filter(i => i !== target.value).join(',')
+    } else {
+        values.push(target.value.trim())
+        values = values.join(',')
+    }
+    emit('update:modelValue', values)
+    emit('change', target.value)
+}
 
 const fileChange = (e): void => {
     emit('update:modelValue', e)
@@ -72,9 +86,10 @@ const fileChange = (e): void => {
         v-bind="$props" />
     <select-input v-if="type === 'select'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
         v-bind="$props" />
-    <checkbox-input v-if="type === 'checkbox'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+    <checkbox-input v-if="type === 'checkbox'" :model-value="modelValue" @update="listChange" @invalid="emit('invalid')"
         v-bind="$props" />
-    <switch-input v-if="type === 'switch'" />
+    <switch-input v-if="type === 'switch'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+        v-bind="$props" />
     <text-area-input v-if="type === 'textarea'" />
     <file-input v-if="type === 'file'" />
     <image-uploader-input v-if="type === 'image-uploader'" />
