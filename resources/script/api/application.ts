@@ -4,7 +4,7 @@ import type { SidebarMenu } from '@/types/sidebar'
 import en from '@/i18n/json/en.json'
 import jp from '@/i18n/json/jp.json'
 
-let sidebar: SidebarMenu[] = [
+export let sidebarResponse: SidebarMenu[] = [
     {
         id: "dashboard-samples",
         icon: "pie-chart",
@@ -81,19 +81,6 @@ let sidebar: SidebarMenu[] = [
     },
     { icon: "credit-card", name: "Payment Method", url: "/app/payment-view", permission: true },
     { icon: "book", name: "Documentation", url: "/app/documentation/index.html", permission: true }]
-let logo = 'https://inlink.gainhq.com/images/default-logo.png'
-let icon = 'https://inlink.gainhq.com/images/default-icon.png'
-export const GET_SETTINGS = () => {
-    return new Promise<Settings>((resolve, reject) => {
-        setTimeout(() => {
-            return resolve({
-                sidebar,
-                logo,
-                icon
-            })
-        }, 1000)
-    })
-}
 
 const locales: Locale[] = [
     {
@@ -111,7 +98,7 @@ const locales: Locale[] = [
 ]
 
 const messageData = (lan: string) => {
-    if (lan === 'en') return en 
+    if (lan === 'en') return en
     else if (lan === 'jp') return jp
     else return en
 }
@@ -121,7 +108,7 @@ export const GET_LOCALES_LIST = () => {
         setTimeout(() => {
             return resolve(locales)
         }, 500)
-    }) 
+    })
 }
 
 export const GET_LOCALE = (language: string) => {
@@ -130,4 +117,8 @@ export const GET_LOCALE = (language: string) => {
             return resolve({ messages: messageData(language) })
         }, 500)
     })
+}
+
+export const GET_SETTINGS = (params) => {
+    return http.get<Settings>('/app-setting?' + new URLSearchParams(params).toString())
 }

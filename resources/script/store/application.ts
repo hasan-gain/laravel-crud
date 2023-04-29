@@ -1,22 +1,27 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import type { Settings } from '@/types/application'
 import { GET_SETTINGS } from '@/api/application'
 import { useLocaleStore } from '@/store/locale'
+import { sidebarResponse } from '@/api/application'
+import i18n from '@/i18n'
+import { loadLocaleMessages } from '@/i18n'
+import type { Settings } from '@/types/application'
+import type { SidebarMenu } from '@/types/sidebar'
 
 export const useAppStore = defineStore('app', () => {
     // state
     const leftMenu = ref<string>('')
     const loading = ref<boolean>(false)
-    const settings = reactive<Settings>({ sidebar: [], logo: '', icon: '' })
+    const settings = reactive<Settings>({ company_banner: '', company_icon: '', company_logo: '', company_name: '', time_format: 'h', time_zone: '', default_language: localStorage.locale, date_format: '', currency_symbol: '', currency_position: '', thousand_separator: ',' })
+    const sidebar = reactive<SidebarMenu[]>(sidebarResponse)
     const localeStore = useLocaleStore()
 
     // methods
     const init = async () => {
         try {
             loading.value = true
-            await setLeftMenu()
             await getSetting()
+            await setLeftMenu()
             await localeStore.init()
         } catch (error) {
             console.error(error)
@@ -50,16 +55,20 @@ export const useAppStore = defineStore('app', () => {
             console.error(err)
         }
     }
+
     const getSetting = async () => {
         try {
-            let { sidebar, logo, icon } = await GET_SETTINGS().then(res => ({ ...res }))
-            settings.sidebar = sidebar
-            settings.logo = logo
-            settings.icon = icon
+            let res = await GET_SETTINGS({ lang: localeStore.locale || 'en' }).then(res => ({ ...res.data }))
+            for (let item in res) {
+                if (item !== 'language_file') {
+                    settings[item] = res[item]
+                }
+            }
+            loadLocaleMessages(i18n, localeStore.locale, res.language_file)
         }
         catch (err) {
             console.error(err)
         }
     }
-    return { init, setLeftMenu, loading, leftMenu, settings }
+    return { init, setLeftMenu, loading, leftMenu, settings, sidebar }
 })
