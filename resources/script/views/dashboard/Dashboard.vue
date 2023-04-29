@@ -31,23 +31,35 @@ const submit = (event) => {
         <div>Dashboard</div>
         <div>{{ $t('test') }}</div>
         <div class="d-flex flex-column">
-            <form @submit.prevent="submit" novalidate="true">
+            <form @submit.prevent="submit">
                 <div class="row justify-content-center">
                     <div class="col-7">
                         <div class="d-flex flex-column gap-y-2">
-                            <div>
-                                <app-input v-model="formData.text" type="text" input-class="border border-danger" id="name"
-                                    name="name" @invalid="errors['name'] = 'Enter name properly'"
-                                    :options="{ errorClass: 'border-danger--importent' }" required autocomplete="off"
-                                    placeholder="User ID" />
-                                <label for="name">{{ errors['name'] }}</label>
+                            <!-- <div>
+                                <app-input v-model="formData.text" type="search" input-class="border border-danger"
+                                    id="name" name="name" @invalid="errors['name'] = 'Enter name properly'" :options="{}"
+                                    required autocomplete="off" placeholder="User ID" />
+                                <small class="text-danger">{{ errors['name'] }}</small>
                             </div>
                             <div>
-                                <app-input v-model="formData.password" type="password" name="password" :minlength="6"
-                                    @invalid="errors['password'] = 'Invalid password'"
-                                    :options="{ errorClass: 'border-danger--importent', showPasswordEye: true }"
-                                    placeholder="Password" required />
-                                <label for="name">{{ errors['password'] }}</label>
+                                <app-input v-model="formData.password" type="number" name="age" :minlength="6"
+                                    @invalid="errors['age'] = 'Age required'"
+                                    :options="{ errorClass: 'border-danger--importent' }" placeholder="Age" required />
+                                <small class="text-danger">{{ errors['age'] }}</small>
+                            </div>
+                            <div>
+                                <app-input v-model="formData.email" type="email" name="email" :minlength="6"
+                                    @invalid="errors['email'] = 'Email Envalid'"
+                                    :options="{ errorClass: 'border-danger--importent' }" placeholder="admin@demo.com"
+                                    required />
+                                <small class="text-danger">{{ errors['email'] }}</small>
+                            </div> -->
+                            <div>
+                                <app-input v-model="formData.gender" type="checkbox" name="gender" @change="change"
+                                    @invalid="errors['gender'] = 'Select gender'"
+                                    :options="{ errorClass: 'border-danger--importent' }"
+                                    :list="[{ id: 1, value: 'male' }, { id: 2, value: 'female' }]" required />
+                                <small class="text-danger">{{ errors['gender'] }}</small>
                             </div>
                             <hr class="w-100">
                             <input class="btn btn-success" type="submit" value="Submit">

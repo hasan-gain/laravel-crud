@@ -28,10 +28,12 @@ interface Props {
     inputClass?: string
     maxlength?: number
     minlength?: number
-    options?: InputOption,
+    options?: InputOption
     list?: InputListItem[]
     textAreaCols?: number
-    textAreaRows?: number,
+    textAreaRows?: number
+    listValueField?: string
+    labelClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {})
@@ -60,12 +62,18 @@ const fileChange = (e): void => {
         v-bind="$props" />
     <password-input v-if="type === 'password'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
         v-bind="$props" />
-    <email-input v-if="type === 'email'" />
-    <number-input v-if="type === 'number'" />
-    <search-input v-if="type === 'search'" />
-    <radio-input v-if="type === 'radio'" />
-    <select-input v-if="type === 'select'" />
-    <checkbox-input v-if="type === 'checkbox'" />
+    <email-input v-if="type === 'email'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+        v-bind="$props" />
+    <number-input v-if="type === 'number'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+        v-bind="$props" />
+    <search-input v-if="type === 'search'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+        v-bind="$props" />
+    <radio-input v-if="type === 'radio'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+        v-bind="$props" />
+    <select-input v-if="type === 'select'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+        v-bind="$props" />
+    <checkbox-input v-if="type === 'checkbox'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+        v-bind="$props" />
     <switch-input v-if="type === 'switch'" />
     <text-area-input v-if="type === 'textarea'" />
     <file-input v-if="type === 'file'" />
