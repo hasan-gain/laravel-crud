@@ -22,16 +22,13 @@
                         <div class="form-row">
                             <div class="form-group col-12 px-0">
                                 <label for="login_email">{{ ('email') }}</label>
-                                <!-- <app-input  -->
-                                <!--     type="email" -->
-                                <!--     v-model="login.email" -->
-                                <!-- /> -->
                                 <app-input 
                                     v-model="login.email" 
                                     type="email" 
                                     name="login_email" 
                                     placeholder="Enter email"
                                     @invalid="handleInvalidEmail"
+                                    @change="emailErrMsg = ''"
                                     required 
                                 />
                                 <div v-if="emailErrMsg"
@@ -46,16 +43,13 @@
                         <div class="form-row">
                             <div class="form-group col-12 px-0">
                                 <label for="login_password">{{ ('password') }}</label>
-                                <!-- <app-input type="password" -->
-                                <!--            v-model="login.password" -->
-                                <!--            :placeholder="('enter_your_password')" -->
-                                <!--            :required="true"/> -->
                                 <app-input 
                                     v-model="login.password" 
                                     type="password" 
                                     name="login_password" 
                                     placeholder="Enter password"
                                     @invalid="handleInvalidPassword"
+                                    @change="passwordErrMsg = ''"
                                     required 
                                 />
                                 <div v-if="passwordErrMsg"
@@ -111,7 +105,7 @@
 <script setup lang="ts">
 import { useAuthStore } from '../../store/auth'
 import { storeToRefs } from 'pinia'
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import AppInput from '@/lib/components/input/index.vue'
 const authStore = useAuthStore()
 const { loading } = storeToRefs(authStore)
@@ -146,34 +140,13 @@ const login = ref<AuthCredentials>({
 
 const emailErrMsg = ref<string>('');
 const passwordErrMsg = ref<string>('');
-const handleInvalidPassword = () => {
-    console.log('invalid password');
+const handleInvalidPassword = (): void  => {
     passwordErrMsg.value = 'Invalid password';
 }
 
-const handleInvalidEmail = () => {
-    console.log('invalid email');
+const handleInvalidEmail = (): void => {
     emailErrMsg.value = 'Invalid email';
 }
-
-// const errors = ref<Error[]>([
-//     {
-//         name: 'login_email',
-//         message: '',
-//     },
-//     {
-//         name: 'login_password',
-//         message: '',
-//     }
-// ])
-
-// const enableLogin = computed((): boolean=> {
-//     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//     const emailValid: boolean = regex.test(login.value.email)
-//     const passwordValid: boolean = Boolean(login.value.password);
-//     return Boolean(emailValid && passwordValid);
-// });
-
 
 
 
