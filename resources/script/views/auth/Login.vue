@@ -8,9 +8,7 @@
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 pl-md-0">
                 <div class="login-form d-flex align-items-center">
-                    <form class="sign-in-sign-up-form w-100"
-                          ref="form" data-url="/admin/users/login" action="store">
-
+                    <form class="sign-in-sign-up-form w-100" @submit.prevent="submit">
                         <div class="text-center mb-4">
                             <img :src="smallImage" alt=""
                                  class="img-fluid logo">
@@ -33,6 +31,7 @@
                                     type="email" 
                                     name="login_email" 
                                     placeholder="Enter email"
+                                    @invalid="handleInvalidInput"
                                     required 
                                 />
                             </div>
@@ -61,7 +60,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12 px-0">
-                                <button :disabled="!enableLogin" class="btn btn-primary w-100" @click.prevent="submit">
+                                <button type="submit" class="btn btn-primary w-100">
                                     <span v-if="loading" class="spinner-bounce">
                                         <span class="bounce1 mr-1"/>
                                         <span class="bounce2 mr-1"/>
@@ -101,17 +100,20 @@ import { computed, ref } from 'vue';
 import AppInput from '@/lib/components/input/index.vue'
 const authStore = useAuthStore()
 const { loading } = storeToRefs(authStore)
+
 const submit = (event) => {
-    return console.log(login.value);
-    authStore.Login(event);
+    return console.log('this is running');
+    // authStore.Login(event);
 }
+
 interface Props {
     recaptchaEnable?: boolean,
-    siteKey: string
+    siteKey?: string
 }
   
 const props = withDefaults(defineProps<Props>(), {
-    recaptchaEnable: false
+    recaptchaEnable: false,
+    siteKey: ''
 })
 
 interface AuthCredentials {
@@ -130,6 +132,10 @@ const enableLogin = computed((): boolean=> {
     const passwordValid: boolean = Boolean(login.value.password);
     return Boolean(emailValid && passwordValid);
 });
+
+const handleInvalidInput = () => {
+    console.log('hello')
+}
 
 
 
