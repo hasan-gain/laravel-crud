@@ -15,13 +15,13 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12 px-0">
-                                <h6 class="text-center mb-0">{{ ('hi_there') }}</h6>
-                                <label class="text-center d-block">{{ ('log_in_to_your_dashboard') }}</label>
+                                <h6 class="text-center mb-0">{{ ('Hi there') }}</h6>
+                                <label class="text-center d-block">{{ ('Log in to your dashboard') }}</label>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12 px-0">
-                                <label for="login_email">{{ ('email') }}</label>
+                                <label for="login_email">{{ ('Email') }}</label>
                                 <app-input 
                                     v-model="login.email" 
                                     type="email" 
@@ -42,7 +42,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12 px-0">
-                                <label for="login_password">{{ ('password') }}</label>
+                                <label for="login_password">{{ ('Password') }}</label>
                                 <app-input 
                                     v-model="login.password" 
                                     type="password" 
@@ -85,13 +85,19 @@
                             class="form-row form-row flex-column flex-md-row justify-content-center justify-content-md-between justify-content-lg-between">
                             <a href="#"
                                class="bluish-text d-flex align-items-center justify-content-center justify-content-lg-end">
-                                <app-icon type="lock" /> {{ ('forgot_password') }}
+                                <div class="mr-2"> 
+                                    <app-icon 
+                                        type="lock" 
+                                        :size="10" 
+                                    />
+                                </div> 
+                                {{ ('Forgot password') }}
                             </a>
                         </div>
                         <div class="form-row">
                             <div class="col-12">
                                 <p class="text-center mt-5">
-                                    {{ ('copyright_text') }}
+                                    {{ ('Copyright text') }}
                                 </p>
                             </div>
                         </div>
