@@ -55,8 +55,9 @@ const submit = (event) => {
                                 <small class="text-danger">{{ errors['email'] }}</small>
                             </div> -->
                             <div>
-                                <app-input v-model="formData.gender" type="switch" name="gender" @change="change"
-                                    input-class="" @invalid="errors['gender'] = 'Select gender'"
+                                <app-input v-model="formData.gender" type="file" name="gender" @change="change"
+                                    placeholder="Text area text" input-class=""
+                                    @invalid="errors['gender'] = 'Select gender'"
                                     :options="{ errorClass: 'border-danger--importent' }"
                                     :list="[{ id: 1, value: 'male' }, { id: 2, value: 'female' }]" required />
                                 <small class="text-danger">{{ errors['gender'] }}</small>

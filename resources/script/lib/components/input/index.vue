@@ -34,6 +34,8 @@ interface Props {
     textAreaRows?: number
     listValueField?: string
     labelClass?: string
+    fileLabel?: string
+    multiple?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {})
@@ -64,9 +66,18 @@ const listChange = (event: Event) => {
     emit('change', target.value)
 }
 
-const fileChange = (e): void => {
-    emit('update:modelValue', e)
-    emit('change', e)
+const fileChange = (event): void => {
+    const target = event.target as HTMLInputElement
+    let files: File[] = []
+    if (target.files?.length) {
+        for (let i = 0; i < target.files?.length; i++) {
+            files.push(target.files[i])
+        }
+    }
+    if (files?.length) {
+        emit('update:modelValue', props.multiple ? files : files[0])
+    }
+    emit('change', target.value)
 }
 
 </script>
@@ -90,7 +101,9 @@ const fileChange = (e): void => {
         v-bind="$props" />
     <switch-input v-if="type === 'switch'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
         v-bind="$props" />
-    <text-area-input v-if="type === 'textarea'" />
-    <file-input v-if="type === 'file'" />
+    <text-area-input v-if="type === 'textarea'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+        v-bind="$props" />
+    <file-input v-if="type === 'file'" :model-value="modelValue" @update="fileChange" @invalid="emit('invalid')"
+        v-bind="$props" />
     <image-uploader-input v-if="type === 'image-uploader'" />
 </template>

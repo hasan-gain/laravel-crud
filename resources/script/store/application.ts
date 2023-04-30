@@ -21,8 +21,8 @@ export const useAppStore = defineStore('app', () => {
         try {
             loading.value = true
             await getSetting()
-            await setLeftMenu()
             await localeStore.init()
+            await setLeftMenu()
         } catch (error) {
             console.error(error)
         }
@@ -64,6 +64,7 @@ export const useAppStore = defineStore('app', () => {
                     settings[item] = res[item]
                 }
             }
+            localeStore.setLocalList(res.languages || [])
             loadLocaleMessages(i18n, localeStore.locale, res.language_file)
         }
         catch (err) {

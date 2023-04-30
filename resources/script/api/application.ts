@@ -1,8 +1,6 @@
 import http from '@/helper/http'
 import type { Settings, LocaleResponse, Locale } from '@/types/application'
 import type { SidebarMenu } from '@/types/sidebar'
-import en from '@/i18n/json/en.json'
-import jp from '@/i18n/json/jp.json'
 
 export let sidebarResponse: SidebarMenu[] = [
     {
@@ -81,43 +79,6 @@ export let sidebarResponse: SidebarMenu[] = [
     },
     { icon: "credit-card", name: "Payment Method", url: "/app/payment-view", permission: true },
     { icon: "book", name: "Documentation", url: "/app/documentation/index.html", permission: true }]
-
-const locales: Locale[] = [
-    {
-        id: 'en',
-        key: 'en',
-        title: 'English',
-        value: 'English'
-    },
-    {
-        id: 'jp',
-        key: 'jp',
-        title: 'Japanese',
-        value: 'Japanese'
-    },
-]
-
-const messageData = (lan: string) => {
-    if (lan === 'en') return en
-    else if (lan === 'jp') return jp
-    else return en
-}
-
-export const GET_LOCALES_LIST = () => {
-    return new Promise<Locale[]>((resolve, reject) => {
-        setTimeout(() => {
-            return resolve(locales)
-        }, 500)
-    })
-}
-
-export const GET_LOCALE = (language: string) => {
-    return new Promise<LocaleResponse>((resolve, reject) => {
-        setTimeout(() => {
-            return resolve({ messages: messageData(language) })
-        }, 500)
-    })
-}
 
 export const GET_SETTINGS = (params) => {
     return http.get<Settings>('/app-setting?' + new URLSearchParams(params).toString())
