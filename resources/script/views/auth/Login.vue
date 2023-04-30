@@ -31,9 +31,16 @@
                                     type="email" 
                                     name="login_email" 
                                     placeholder="Enter email"
-                                    @invalid="handleInvalidInput"
+                                    @invalid="handleInvalidEmail"
                                     required 
                                 />
+                                <div v-if="emailErrMsg"
+                                    :key="'error'">
+                                    <small
+                                        class="text-danger validation-error">
+                                        {{ emailErrMsg }}
+                                    </small>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -48,8 +55,16 @@
                                     type="password" 
                                     name="login_password" 
                                     placeholder="Enter password"
+                                    @invalid="handleInvalidPassword"
                                     required 
                                 />
+                                <div v-if="passwordErrMsg"
+                                    :key="'error'">
+                                    <small
+                                        class="text-danger validation-error">
+                                        {{ passwordErrMsg }}
+                                    </small>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row" v-if="recaptchaEnable">
@@ -102,7 +117,10 @@ const authStore = useAuthStore()
 const { loading } = storeToRefs(authStore)
 
 const submit = (event) => {
-    return console.log('this is running');
+    emailErrMsg.value = '';
+    passwordErrMsg.value = '';
+
+    return console.log('Login data ok');
     // authStore.Login(event);
 }
 
@@ -126,16 +144,35 @@ const login = ref<AuthCredentials>({
     password: ''
 })
 
-const enableLogin = computed((): boolean=> {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const emailValid: boolean = regex.test(login.value.email)
-    const passwordValid: boolean = Boolean(login.value.password);
-    return Boolean(emailValid && passwordValid);
-});
-
-const handleInvalidInput = () => {
-    console.log('hello')
+const emailErrMsg = ref<string>('');
+const passwordErrMsg = ref<string>('');
+const handleInvalidPassword = () => {
+    console.log('invalid password');
+    passwordErrMsg.value = 'Invalid password';
 }
+
+const handleInvalidEmail = () => {
+    console.log('invalid email');
+    emailErrMsg.value = 'Invalid email';
+}
+
+// const errors = ref<Error[]>([
+//     {
+//         name: 'login_email',
+//         message: '',
+//     },
+//     {
+//         name: 'login_password',
+//         message: '',
+//     }
+// ])
+
+// const enableLogin = computed((): boolean=> {
+//     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     const emailValid: boolean = regex.test(login.value.email)
+//     const passwordValid: boolean = Boolean(login.value.password);
+//     return Boolean(emailValid && passwordValid);
+// });
 
 
 
