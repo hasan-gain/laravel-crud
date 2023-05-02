@@ -105,5 +105,6 @@ const fileChange = (event): void => {
         v-bind="$props" />
     <file-input v-if="type === 'file'" :model-value="modelValue" @update="fileChange" @invalid="emit('invalid')"
         v-bind="$props" />
-    <image-uploader-input v-if="type === 'image-uploader'" />
+    <image-uploader-input v-if="type === 'image-uploader'" :model-value="modelValue" @update="fileChange"
+        @invalid="emit('invalid')" v-bind="$props" />
 </template>
