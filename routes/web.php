@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'home')->name('home');
+Route::view('/documents', 'documents')->name('documents');
+
+// only for vue
+Route::view('app/{opt?}', 'app')->where('opt', '.*');

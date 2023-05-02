@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,13 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('register', 'register');
     Route::post('login', 'login');
 });
+Route::apiResource('app-setting', SettingController::class);
+Route::get('languages', [SettingController::class, 'languages']);
 
 Route::middleware('auth:sanctum')->group( function () {
-    Route::apiResource('users', UserController::class);
+    Route::get('me', [UserController::class, 'me']);
+    Route::post('logout', [AuthController::class, 'logout']);
+
+//    Route::apiResource('users', UserController::class);
+    Route::apiResource('posts', PostController::class);
 });

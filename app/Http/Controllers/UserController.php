@@ -61,4 +61,9 @@ class UserController extends Controller
         }
         return successResponse('User deleted successfully');
     }
+
+    public function me()
+    {
+        return auth()->user();
+    }
 }
