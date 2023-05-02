@@ -137,6 +137,27 @@
             </div>
         </div>
     </div> 
+    <button class="btn btn-info" @click="showModal = !showModal">Show modal</button>
+
+    <AppModal 
+        id="my-modal-1"
+        size="xl"
+        v-if="showModal"
+        :static-backdrop="true"
+    >
+        <template #modal-header>
+            <p class="modal-title fs-4" id="exampleModalLabel">Modal header</p>
+            <button @click="showModal = false" type="button" class="btn-close" aria-label="Close">Close</button>
+        </template>
+        <template #modal-body>
+            <div>
+                Hello world from modal
+            </div>
+        </template>
+        <template #modal-footer>
+            <button @click="showModal = false" type="button" class="btn btn-secondary">Close</button>
+        </template>
+    </AppModal>
 </template>
 
 <script setup lang="ts">
@@ -144,9 +165,30 @@ import { useAuthStore } from '../../store/auth'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue';
 import AppInput from '@/lib/components/input/index.vue'
+import AppModal from '@/lib/components/modal/index.vue'
 import FormInput from '@/lib/components/input/FormInput.vue'
 const authStore = useAuthStore()
 const { loading } = storeToRefs(authStore)
+
+const showModal = ref<boolean>(true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const submit = (event) => {
     // emailErrMsg.value = '';
