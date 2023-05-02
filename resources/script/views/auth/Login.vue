@@ -63,12 +63,13 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12 px-0">
-                                {{text}}
                                 <form-input 
                                     :label="'hello world'"
                                     v-model="text"
                                     type="text" 
                                     name="name" 
+                                    :required="true"
+                                    :errorMessage="'invalid input'"
                                     placeholder="Placeholder"
                                 />
                             </div>
