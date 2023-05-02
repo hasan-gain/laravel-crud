@@ -21,59 +21,77 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12 px-0">
-                                <label for="login_email">{{ ('Email') }}</label>
-                                <app-input 
-                                    v-model="login.email" 
+                                <!-- <label for="login_email">{{ ('Email') }}</label> -->
+                                <!-- <app-input  -->
+                                <!--     v-model="login.email"  -->
+                                <!--     type="email"  -->
+                                <!--     name="login_email"  -->
+                                <!--     placeholder="Enter email" -->
+                                <!--     @invalid="handleInvalidEmail" -->
+                                <!--     @change="emailErrMsg = ''" -->
+                                <!--     required  -->
+                                <!-- /> -->
+                                <!-- <div v-if="emailErrMsg" -->
+                                <!--     :key="'error'"> -->
+                                <!--     <small -->
+                                <!--         class="text-danger validation-error"> -->
+                                <!--         {{ emailErrMsg }} -->
+                                <!--     </small> -->
+                                <!-- </div> -->
+                                <form-input 
+                                    :label="'Email'"
+                                    v-model="login.email"
                                     type="email" 
                                     name="login_email" 
+                                    :required="true"
+                                    :errorMessage="emailErrMsg"
                                     placeholder="Enter email"
-                                    @invalid="handleInvalidEmail"
-                                    @change="emailErrMsg = ''"
-                                    required 
                                 />
-                                <div v-if="emailErrMsg"
-                                    :key="'error'">
-                                    <small
-                                        class="text-danger validation-error">
-                                        {{ emailErrMsg }}
-                                    </small>
-                                </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12 px-0">
-                                <label for="login_password">{{ ('Password') }}</label>
-                                <app-input 
-                                    v-model="login.password" 
+                                <!-- <label for="login_password">{{ ('Password') }}</label> -->
+                                <!-- <app-input  -->
+                                <!--     v-model="login.password"  -->
+                                <!--     type="password"  -->
+                                <!--     name="login_password"  -->
+                                <!--     placeholder="Enter password" -->
+                                <!--     @invalid="handleInvalidPassword" -->
+                                <!--     @change="passwordErrMsg = ''" -->
+                                <!--     required  -->
+                                <!-- /> -->
+                                <!-- <div v-if="passwordErrMsg" -->
+                                <!--     :key="'error'"> -->
+                                <!--     <small -->
+                                <!--         class="text-danger validation-error"> -->
+                                <!--         {{ passwordErrMsg }} -->
+                                <!--     </small> -->
+                                <!-- </div> -->
+                                <form-input 
+                                    :label="'Password'"
+                                    v-model="login.password"
                                     type="password" 
                                     name="login_password" 
-                                    placeholder="Enter password"
-                                    @invalid="handleInvalidPassword"
-                                    @change="passwordErrMsg = ''"
-                                    required 
-                                />
-                                <div v-if="passwordErrMsg"
-                                    :key="'error'">
-                                    <small
-                                        class="text-danger validation-error">
-                                        {{ passwordErrMsg }}
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-12 px-0">
-                                <form-input 
-                                    :label="'hello world'"
-                                    v-model="text"
-                                    type="text" 
-                                    name="name" 
                                     :required="true"
-                                    :errorMessage="'invalid input'"
-                                    placeholder="Placeholder"
+                                    :errorMessage="passwordErrMsg"
+                                    placeholder="Enter password"
                                 />
                             </div>
                         </div>
+                        <!-- <div class="form-row"> -->
+                        <!--     <div class="form-group col-12 px-0"> -->
+                        <!--         <form-input  -->
+                        <!--             :label="'hello world'" -->
+                        <!--             v-model="text" -->
+                        <!--             type="text"  -->
+                        <!--             name="name"  -->
+                        <!--             :required="true" -->
+                        <!--             :errorMessage="'invalid input'" -->
+                        <!--             placeholder="Placeholder" -->
+                        <!--         /> -->
+                        <!--     </div> -->
+                        <!-- </div> -->
                         <div class="form-row" v-if="recaptchaEnable">
                             <div class="form-group col-12 px-0">
                                 <!-- <re-captcha :site-key="siteKey"></re-captcha> -->
@@ -131,11 +149,11 @@ const authStore = useAuthStore()
 const { loading } = storeToRefs(authStore)
 
 const submit = (event) => {
-    emailErrMsg.value = '';
-    passwordErrMsg.value = '';
+    // emailErrMsg.value = '';
+    // passwordErrMsg.value =  '';
 
     return console.log('Login data ok');
-    // authStore.Login(event);
+    authStore.Login(event);
 }
 
 interface Props {
@@ -158,8 +176,8 @@ const login = ref<AuthCredentials>({
     password: ''
 })
 
-const emailErrMsg = ref<string>('');
-const passwordErrMsg = ref<string>('');
+const emailErrMsg = ref<string>('Invalid email');
+const passwordErrMsg = ref<string>('Invalid password');
 const handleInvalidPassword = (): void  => {
     passwordErrMsg.value = 'Invalid password';
 }

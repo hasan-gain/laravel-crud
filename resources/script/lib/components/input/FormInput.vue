@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { InputListItem, InputOption } from '@/types/component/input';
-import { ref } from 'vue';
+import { ref, toRef, watch } from 'vue';
 import AppInput from './index.vue';
 
 export interface FormInputProps {
@@ -24,35 +24,41 @@ export interface FormInputProps {
     labelClass?: string
 
     label?: string
-    errorMessage: string
+    errorMessage?: string
 }
 
-const props = withDefaults(defineProps<FormInputProps>(), {})
+const props = withDefaults(defineProps<FormInputProps>(), {
+    errorMessage: 'default value'
+});
 const emit = defineEmits(['update:modelValue', 'change']);
 
-const handleAppInputChange = (newChangedValue): void => {
-    inputInvalid.value = false;
+
+const inputInvalid = ref<boolean>(false);
+const handleAppInputChange = (newChangedValue: any): void => {
     emit('update:modelValue', newChangedValue);
     emit('change', newChangedValue);
 }
-
-const inputInvalid = ref<boolean>(false);
 const handleInvalidInput = (): void => {
+    console.log('this is running');
     inputInvalid.value = true;
 }
+
+watch(() => props.errorMessage, (newErrorMessage: string) => {
+    if (!newErrorMessage) return;
+    inputInvalid.value = true;
+});
 
 </script>
 
 <template>
     <div>
-        <label :for="id">{{label}}</label>
+        <label v-if="label" :for="id">{{label}}</label>
         <app-input 
             @change="handleAppInputChange"
             @invalid="handleInvalidInput"
             v-bind="$props" 
         />
-        <div v-if="inputInvalid"
-            :key="'error'">
+        <div v-if="inputInvalid" :key="'error'">
             <small class="text-danger validation-error">
                 {{ errorMessage }}
             </small>
