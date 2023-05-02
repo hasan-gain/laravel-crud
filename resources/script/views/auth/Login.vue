@@ -61,6 +61,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group col-12 px-0">
+                                {{text}}
+                                <form-input 
+                                    :label="'hello world'"
+                                    v-model="text"
+                                    type="text" 
+                                    name="name" 
+                                    placeholder="Placeholder"
+                                />
+                            </div>
+                        </div>
                         <div class="form-row" v-if="recaptchaEnable">
                             <div class="form-group col-12 px-0">
                                 <!-- <re-captcha :site-key="siteKey"></re-captcha> -->
@@ -113,6 +125,7 @@ import { useAuthStore } from '../../store/auth'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue';
 import AppInput from '@/lib/components/input/index.vue'
+import FormInput from '@/lib/components/input/FormInput.vue'
 const authStore = useAuthStore()
 const { loading } = storeToRefs(authStore)
 
@@ -153,6 +166,9 @@ const handleInvalidPassword = (): void  => {
 const handleInvalidEmail = (): void => {
     emailErrMsg.value = 'Invalid email';
 }
+
+
+const text = ref<string>('');
 
 
 
