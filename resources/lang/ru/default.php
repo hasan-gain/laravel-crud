@@ -417,6 +417,6 @@ return array_merge([
     'aws_bucket_name' => 'AWS bucket name',
     'aws_region' => 'AWS region',
     'aws_access_key' => 'AWS access key',
-    'test' => 'テスト',
+    'test' => 'тест',
     'aws_secret_key' => 'AWS secret key',
 ], include 'custom.php');

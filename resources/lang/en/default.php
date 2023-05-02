@@ -419,4 +419,4 @@ return array_merge([
     'aws_access_key' => 'AWS access key',
     'test' => 'Test',
     'aws_secret_key' => 'AWS secret key',
-], include 'custom.php');
+], include 'core.php', include 'custom.php');

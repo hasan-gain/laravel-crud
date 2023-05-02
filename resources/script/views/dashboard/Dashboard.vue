@@ -2,6 +2,7 @@
 import { reactive } from 'vue';
 import AppInput from '@/lib/components/input/index.vue'
 const formData = reactive<any>({
+    gender: 'http://readykit.test/images/logo.png'
 })
 
 // state
@@ -30,8 +31,8 @@ const submit = (event) => {
     <div class="content-wrapper">
         <div>Dashboard</div>
         <div>{{ $t('test') }}</div>
-        <div class="d-flex flex-column">
-            <form @submit.prevent="submit">
+        <div class="d-flex flex-column bg-white p-3">
+            <form @submit.prevent="submit" novalidate>
                 <div class="row justify-content-center">
                     <div class="col-7">
                         <div class="d-flex flex-column gap-y-2">
@@ -55,7 +56,8 @@ const submit = (event) => {
                                 <small class="text-danger">{{ errors['email'] }}</small>
                             </div> -->
                             <div>
-                                <app-input v-model="formData.gender" type="checkbox" name="gender" @change="change"
+                                <app-input v-model="formData.gender" type="image-uploader" name="gender" @change="change"
+                                    placeholder="Text area text" input-class=""
                                     @invalid="errors['gender'] = 'Select gender'"
                                     :options="{ errorClass: 'border-danger--importent' }"
                                     :list="[{ id: 1, value: 'male' }, { id: 2, value: 'female' }]" required />

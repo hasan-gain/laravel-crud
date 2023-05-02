@@ -1,18 +1,6 @@
-// import { createI18n } from 'vue-i18n'
-
-// const i18n = createI18n({
-//     locale: 'en',
-//     fallbackLocale: { 'en': ['en'] },
-//     formatFallbackMessages: true,
-//     legacy: false
-// })
-
-// export default i18n
-
 import { nextTick } from 'vue'
 import { createI18n } from 'vue-i18n'
 import type { I18nOptions } from 'vue-i18n'
-import { GET_LOCALE } from '@/api/application'
 
 export const SUPPORT_LOCALES = ['en', 'ja']
 

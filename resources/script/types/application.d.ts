@@ -13,11 +13,10 @@ export interface Settings {
     currency_symbol: string
     currency_position: string
     language_file?: {}
+    languages?: Locale[]
 }
 export interface Locale {
-    id: string
     key: string
     title: string
-    value: string
 }
 export interface LocaleResponse { messages: {} }

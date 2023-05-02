@@ -34,25 +34,50 @@ interface Props {
     textAreaRows?: number
     listValueField?: string
     labelClass?: string
+    fileLabel?: string
+    multiple?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {})
 
 const emit = defineEmits(['update:modelValue', 'change', 'invalid'])
 
-
 // methods
 const textChange = (event: Event): void => {
     const target = event.target as HTMLInputElement
+    if (props.type === 'switch') {
+        emit('update:modelValue', Number(target.checked).toString())
+        return
+    }
     emit('update:modelValue', target.value)
     emit('change', target.value)
 }
 
-const listChange = () => { }
+const listChange = (event: Event) => {
+    const target = event.target as HTMLInputElement
+    let values = props.modelValue?.split(',').filter(i => !!i) || []
+    if (values.includes(target.value.trim())) {
+        values = values.filter(i => i !== target.value).join(',')
+    } else {
+        values.push(target.value.trim())
+        values = values.join(',')
+    }
+    emit('update:modelValue', values)
+    emit('change', target.value)
+}
 
-const fileChange = (e): void => {
-    emit('update:modelValue', e)
-    emit('change', e)
+const fileChange = (event): void => {
+    const target = event.target as HTMLInputElement
+    let files: File[] = []
+    if (target.files?.length) {
+        for (let i = 0; i < target.files?.length; i++) {
+            files.push(target.files[i])
+        }
+    }
+    if (files?.length) {
+        emit('update:modelValue', props.multiple ? files : files[0])
+    }
+    emit('change', target.value)
 }
 
 </script>
@@ -72,10 +97,14 @@ const fileChange = (e): void => {
         v-bind="$props" />
     <select-input v-if="type === 'select'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
         v-bind="$props" />
-    <checkbox-input v-if="type === 'checkbox'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+    <checkbox-input v-if="type === 'checkbox'" :model-value="modelValue" @update="listChange" @invalid="emit('invalid')"
         v-bind="$props" />
-    <switch-input v-if="type === 'switch'" />
-    <text-area-input v-if="type === 'textarea'" />
-    <file-input v-if="type === 'file'" />
-    <image-uploader-input v-if="type === 'image-uploader'" />
+    <switch-input v-if="type === 'switch'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+        v-bind="$props" />
+    <text-area-input v-if="type === 'textarea'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
+        v-bind="$props" />
+    <file-input v-if="type === 'file'" :model-value="modelValue" @update="fileChange" @invalid="emit('invalid')"
+        v-bind="$props" />
+    <image-uploader-input v-if="type === 'image-uploader'" :model-value="modelValue" @update="fileChange"
+        @invalid="emit('invalid')" v-bind="$props" />
 </template>

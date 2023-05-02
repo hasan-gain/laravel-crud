@@ -35,10 +35,10 @@
                             <li class="nav-item">
                                 <button class="navbar-toggler align-self-center" type="button" @click="toggleDark()">
                                     <span v-if="isDark" :key="'sun'" title="light_mood">
-                                        <app-icon type="moon" />
+                                        <app-icon type="sun" />
                                     </span>
                                     <span v-else :key="'moon'" title="dark_mood">
-                                        <app-icon type="sun" />
+                                        <app-icon type="moon" />
                                     </span>
                                 </button>
                             </li>
