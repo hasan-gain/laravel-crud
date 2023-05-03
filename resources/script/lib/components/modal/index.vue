@@ -10,15 +10,19 @@ const modal = ref<Modal | any>(null)
 
 interface Props {
     id: string;
-    size?: 'xl' | 'lg' | 'md';
+    size?: 'xl' | 'lg' | 'sm' | 'fullscreen' | '';
+    fullscreen?: boolean;
     staticBackdrop?: boolean;
-    verticallyCentered?: boolean,
+    verticallyCentered?: boolean;
+    scrollable: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    size: 'md',
+    size: '',
     staticBackdrop: false,
-    verticallyCentered: false
+    verticallyCentered: false,
+    fullscreen: false,
+    scrollable: false
 });
 
 function emitModalEvents(): void {
@@ -49,12 +53,13 @@ const dynamicAttribute = computed(() => props.staticBackdrop ? 'data-bs-backdrop
 
 <template>
     <div
-        :class="`modal fade ${size ? 'modal-' + size : ''}`" 
+        :class="`modal fade`" 
         tabindex="-1" 
         :id="id"
         :[dynamicAttribute]="'static'"
     >
-        <div :class="`modal-dialog ${verticallyCentered ? 'modal-dialog-centered' : ''}`">
+        <div 
+            :class="`modal-dialog ${scrollable ? 'modal-dialog-scrollable' : ''} ${fullscreen ? 'modal-fullscreen' : ''} ${verticallyCentered ? 'modal-dialog-centered' : ''} ${size ? 'modal-' + size : ''}`">
             <div class="modal-content">
                 <div class="modal-header">
                     <slot name="modal-header"></slot>
