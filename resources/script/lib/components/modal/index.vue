@@ -10,11 +10,14 @@ const modal = ref<Modal | any>(null)
 
 interface Props {
     id: string;
-    size?: 'xl' | 'lg' | 'sm' | 'fullscreen' | '';
+    size?: 'xl' | 'lg' | 'sm' | '';
     fullscreen?: boolean;
     staticBackdrop?: boolean;
     verticallyCentered?: boolean;
-    scrollable: boolean;
+    scrollable?: boolean;
+    bodyClass?: string;
+    headerClass?: string;
+    footerClass?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -61,13 +64,13 @@ const dynamicAttribute = computed(() => props.staticBackdrop ? 'data-bs-backdrop
         <div 
             :class="`modal-dialog ${scrollable ? 'modal-dialog-scrollable' : ''} ${fullscreen ? 'modal-fullscreen' : ''} ${verticallyCentered ? 'modal-dialog-centered' : ''} ${size ? 'modal-' + size : ''}`">
             <div class="modal-content">
-                <div class="modal-header">
+                <div :class="`modal-header ${headerClass ? headerClass : ''}`">
                     <slot name="modal-header"></slot>
                 </div>
-                <div class="modal-body">
+                <div :class="`modal-body ${bodyClass ? bodyClass : ''}`">
                     <slot name="modal-body"></slot>
                 </div>
-                <div class="modal-footer">
+                <div :class="`modal-footer ${footerClass ? footerClass : ''}`">
                     <slot name="modal-footer"></slot>
                 </div>
             </div>

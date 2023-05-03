@@ -139,33 +139,30 @@
     </div> 
     <button class="btn btn-info" @click="showModal = !showModal">Show modal</button>
 
-    <AppModal 
-        id="my-modal-1"
-        size="xl"
-        v-if="showModal"
-        :static-backdrop="true"
+    <!-- <ConfirmationModal  -->
+    <!--     id="my-modal-1" -->
+    <!--     v-if="showModal" -->
+    <!-- /> -->
+    <Modal
+        id="my-modal-id"
     >
-        <template #modal-header>
-            <p class="modal-title fs-4" id="exampleModalLabel">Modal header</p>
-            <button @click="showModal = false" type="button" class="btn-close" aria-label="Close">Close</button>
-        </template>
-        <template #modal-body>
-            <div>
-                Hello world from modal
-            </div>
-        </template>
-        <template #modal-footer>
-            <button @click="showModal = false" type="button" class="btn btn-secondary">Close</button>
-        </template>
-    </AppModal>
+        <div>
+            <h1>
+                this is some body text 
+            </h1>
+        </div> 
+    </Modal>
+
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from '../../store/auth'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue';
-import AppInput from '@/lib/components/input/index.vue'
-import AppModal from '@/lib/components/modal/index.vue'
+// import AppInput from '@/lib/components/input/index.vue'
+// import AppModal from '@/lib/components/modal/index.vue'
+// import ConfirmationModal from '@/lib/components/modal/ConfirmationModal.vue'
+import Modal from '@/lib/components/modal/Modal.vue'
 import FormInput from '@/lib/components/input/FormInput.vue'
 const authStore = useAuthStore()
 const { loading } = storeToRefs(authStore)
