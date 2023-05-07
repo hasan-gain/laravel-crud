@@ -137,23 +137,27 @@
             </div>
         </div>
     </div> 
-    <button class="btn btn-info" @click="showModal = !showModal">Show modal</button>
+    <!-- <button class="btn btn-info" @click="showModal = !showModal">Show modal</button> -->
 
     <!-- <ConfirmationModal  -->
     <!--     id="my-modal-1" -->
     <!--     v-if="showModal" -->
+    <!--     @modal-closed="handleModalClose" -->
+    <!--     @confirmed="handleConfirmed" -->
+    <!--     @cancelled="handleCancelled" -->
     <!-- /> -->
-    <Modal
-        id="my-modal-id"
-        v-if="showModal"
-        @close-modal="handleModalClose"
-    >
-        <div>
-            <p>
-                this is some body text 
-            </p>
-        </div> 
-    </Modal>
+
+    <!-- <Modal -->
+    <!--     id="my-modal-id" -->
+    <!--     v-if="showModal" -->
+    <!--     @modal-closed="handleModalClose" -->
+    <!-- > -->
+    <!--     <div> -->
+    <!--         <p> -->
+    <!--             this is some body text  -->
+    <!--         </p> -->
+    <!--     </div>  -->
+    <!-- </Modal> -->
 
 </template>
 
@@ -163,7 +167,7 @@ import { storeToRefs } from 'pinia'
 import { ref } from 'vue';
 // import AppInput from '@/lib/components/input/index.vue'
 // import AppModal from '@/lib/components/modal/index.vue'
-// import ConfirmationModal from '@/lib/components/modal/ConfirmationModal.vue'
+import ConfirmationModal from '@/lib/components/modal/ConfirmationModal.vue'
 import Modal from '@/lib/components/modal/Modal.vue'
 import FormInput from '@/lib/components/input/FormInput.vue'
 const authStore = useAuthStore()
@@ -171,6 +175,16 @@ const { loading } = storeToRefs(authStore)
 
 const showModal = ref<boolean>(true);
 const handleModalClose = () => {
+    showModal.value = false;
+}
+
+const handleConfirmed = () => {
+    alert('confirm');
+    showModal.value = false;
+}
+
+const handleCancelled = () => {
+    alert('cancelled');
     showModal.value = false;
 }
 

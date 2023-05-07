@@ -42,10 +42,10 @@ const props = withDefaults(defineProps<Props>(), {
     scrollable: true,
     headerText: 'Modal header'
 });
-const emit = defineEmits(['close-modal']);
+const emit = defineEmits(['modal-closed']);
 
 const handleModalClose = () => {
-    emit('close-modal');
+    emit('modal-closed');
 }
 </script>
 

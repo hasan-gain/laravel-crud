@@ -63,14 +63,15 @@ const dynamicAttribute = computed(() => props.staticBackdrop ? 'data-bs-backdrop
     >
         <div 
             :class="`modal-dialog ${scrollable ? 'modal-dialog-scrollable' : ''} ${fullscreen ? 'modal-fullscreen' : ''} ${verticallyCentered ? 'modal-dialog-centered' : ''} ${size ? 'modal-' + size : ''}`">
+
             <div class="modal-content">
-                <div :class="`modal-header ${headerClass ? headerClass : ''}`">
+                <div v-if="$slots['modal-header']" :class="`modal-header ${headerClass ? headerClass : ''}`">
                     <slot name="modal-header"></slot>
                 </div>
-                <div :class="`modal-body ${bodyClass ? bodyClass : ''}`">
+                <div v-if="$slots['modal-body']" :class="`modal-body ${bodyClass ? bodyClass : ''}`">
                     <slot name="modal-body"></slot>
                 </div>
-                <div :class="`modal-footer ${footerClass ? footerClass : ''}`">
+                <div v-if="$slots['modal-footer']" :class="`modal-footer ${footerClass ? footerClass : ''}`">
                     <slot name="modal-footer"></slot>
                 </div>
             </div>
