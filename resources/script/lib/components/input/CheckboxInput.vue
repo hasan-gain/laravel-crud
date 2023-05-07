@@ -50,7 +50,7 @@ const invalid = (event) => {
     <div class="app-checkbox-group" :class="inputClass">
         <div class="customized-checkbox checkbox-default" v-for="(item, index) in list" :key="index">
             <input type="checkbox" :name="name" :id="item.id.toString()" :required="required" @invalid.prevent="invalid"
-                :disabled="item.disabled || disabled" :placeholder="placeholder" :value="item.id"
+                v-on="$attrs" :disabled="item.disabled || disabled" :placeholder="placeholder" :value="item.id"
                 :checked="modelValue.split(',').includes(item.id.toString())" @change="update($event)" />
             <label :for="item.id.toString()" :class="labelClass">
                 {{ item[listValueField || 'value'] }}

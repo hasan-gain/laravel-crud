@@ -1,6 +1,6 @@
 import type { SidebarMenu } from '@/types/sidebar'
 // export interface Settings { sidebar: SidebarMenu[], logo: string, icon: string }
-export interface Settings {
+export interface ISettings {
     company_banner: string
     company_icon: string
     company_logo: string

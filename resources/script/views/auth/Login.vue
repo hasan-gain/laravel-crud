@@ -1,17 +1,15 @@
 <template>
-   <div class="container-fluid p-0">
+    <div class="container-fluid p-0">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-8">
-                <div class="back-image"
-                     :style="`background-image: url('${largeImage}')`">
+                <div class="back-image" :style="`background-image: url('${largeImage}')`">
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 pl-md-0">
                 <div class="login-form d-flex align-items-center">
                     <form class="sign-in-sign-up-form w-100" @submit.prevent="submit">
                         <div class="text-center mb-4">
-                            <img :src="smallImage" alt=""
-                                 class="img-fluid logo">
+                            <img :src="smallImage" alt="" class="img-fluid logo">
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12 px-0">
@@ -38,15 +36,8 @@
                                 <!--         {{ emailErrMsg }} -->
                                 <!--     </small> -->
                                 <!-- </div> -->
-                                <form-input 
-                                    :label="'Email'"
-                                    v-model="login.email"
-                                    type="email" 
-                                    name="login_email" 
-                                    :required="true"
-                                    :errorMessage="emailErrMsg"
-                                    placeholder="Enter email"
-                                />
+                                <form-input :label="'Email'" v-model="login.email" type="email" name="login_email"
+                                    :required="true" :errorMessage="emailErrMsg" placeholder="Enter email" />
                             </div>
                         </div>
                         <div class="form-row">
@@ -68,15 +59,9 @@
                                 <!--         {{ passwordErrMsg }} -->
                                 <!--     </small> -->
                                 <!-- </div> -->
-                                <form-input 
-                                    :label="'Password'"
-                                    v-model="login.password"
-                                    type="password" 
-                                    name="login_password" 
-                                    :required="true"
-                                    :errorMessage="passwordErrMsg"
-                                    placeholder="Enter password"
-                                />
+                                <form-input :label="'Password'" v-model="login.password" type="password"
+                                    name="login_password" :required="true" :errorMessage="passwordErrMsg"
+                                    placeholder="Enter password" />
                             </div>
                         </div>
                         <!-- <div class="form-row"> -->
@@ -102,9 +87,9 @@
                             <div class="form-group col-12 px-0">
                                 <button type="submit" class="btn btn-primary w-100">
                                     <span v-if="loading" class="spinner-bounce">
-                                        <span class="bounce1 mr-1"/>
-                                        <span class="bounce2 mr-1"/>
-                                        <span class="bounce3 mr-1"/>
+                                        <span class="bounce1 mr-1" />
+                                        <span class="bounce2 mr-1" />
+                                        <span class="bounce3 mr-1" />
                                     </span>
                                     <span v-else>
                                         Login
@@ -115,13 +100,10 @@
                         <div
                             class="form-row form-row flex-column flex-md-row justify-content-center justify-content-md-between justify-content-lg-between">
                             <a href="#"
-                               class="bluish-text d-flex align-items-center justify-content-center justify-content-lg-end">
-                                <div class="mr-2"> 
-                                    <app-icon 
-                                        type="lock" 
-                                        :size="10" 
-                                    />
-                                </div> 
+                                class="bluish-text d-flex align-items-center justify-content-center justify-content-lg-end">
+                                <div class="mr-2">
+                                    <app-icon type="lock" :size="10" />
+                                </div>
                                 {{ ('Forgot password') }}
                             </a>
                         </div>
@@ -136,29 +118,7 @@
                 </div>
             </div>
         </div>
-    </div> 
-    <!-- <button class="btn btn-info" @click="showModal = !showModal">Show modal</button> -->
-
-    <!-- <ConfirmationModal  -->
-    <!--     id="my-modal-1" -->
-    <!--     v-if="showModal" -->
-    <!--     @modal-closed="handleModalClose" -->
-    <!--     @confirmed="handleConfirmed" -->
-    <!--     @cancelled="handleCancelled" -->
-    <!-- /> -->
-
-    <!-- <Modal -->
-    <!--     id="my-modal-id" -->
-    <!--     v-if="showModal" -->
-    <!--     @modal-closed="handleModalClose" -->
-    <!-- > -->
-    <!--     <div> -->
-    <!--         <p> -->
-    <!--             this is some body text  -->
-    <!--         </p> -->
-    <!--     </div>  -->
-    <!-- </Modal> -->
-
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -167,50 +127,15 @@ import { storeToRefs } from 'pinia'
 import { ref } from 'vue';
 // import AppInput from '@/lib/components/input/index.vue'
 // import AppModal from '@/lib/components/modal/index.vue'
-import ConfirmationModal from '@/lib/components/modal/ConfirmationModal.vue'
-import Modal from '@/lib/components/modal/Modal.vue'
 import FormInput from '@/lib/components/input/FormInput.vue'
 const authStore = useAuthStore()
 const { loading } = storeToRefs(authStore)
-
-const showModal = ref<boolean>(true);
-const handleModalClose = () => {
-    showModal.value = false;
-}
-
-const handleConfirmed = () => {
-    alert('confirm');
-    showModal.value = false;
-}
-
-const handleCancelled = () => {
-    alert('cancelled');
-    showModal.value = false;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const submit = (event) => {
     // emailErrMsg.value = '';
     // passwordErrMsg.value =  '';
 
-    return console.log('Login data ok');
+    // return console.log('Login data ok');
     authStore.Login(event);
 }
 
@@ -218,7 +143,7 @@ interface Props {
     recaptchaEnable?: boolean,
     siteKey?: string
 }
-  
+
 const props = withDefaults(defineProps<Props>(), {
     recaptchaEnable: false,
     siteKey: ''
@@ -236,7 +161,7 @@ const login = ref<AuthCredentials>({
 
 const emailErrMsg = ref<string>('Invalid email');
 const passwordErrMsg = ref<string>('Invalid password');
-const handleInvalidPassword = (): void  => {
+const handleInvalidPassword = (): void => {
     passwordErrMsg.value = 'Invalid password';
 }
 

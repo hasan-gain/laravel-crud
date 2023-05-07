@@ -29,7 +29,7 @@ export const useAuthStore = defineStore('auth', () => {
     const Login = (event) => {
         loading.value = true
         let formData = new FormData(event.target)
-        login(formData).then(res => {
+        return login(formData).then(res => {
             if (res.statusText === 'OK') {
                 localStorage.setItem('token', res.data.data.access_token)
             }

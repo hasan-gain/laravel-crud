@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import type { InputOption } from '@/types/component/input'
 
 interface Props {
-    modelValue: string
+    modelValue: any
     id?: string
     name?: string,
     autocomplete?: string | 'off'
@@ -17,10 +17,7 @@ interface Props {
     multiple?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-    modelValue: '',
-    autocomplete: ''
-})
+const props = withDefaults(defineProps<Props>(), {})
 
 const emit = defineEmits(['update', 'invalid'])
 
@@ -55,7 +52,8 @@ const open = () => {
             :multiple="multiple" :disabled="disabled" :required="required" :autocomplete="autocomplete"
             :placeholder="placeholder" :readonly="readonly" @change="update($event)" @invalid.prevent="invalid">
         <label class="custom-file-label text-muted" :for="id">
-            {{ fileLabel || modelValue || $t('choose') }}
+            {{ multiple ? typeof modelValue === 'string' ? modelValue : `${modelValue.length} ${$t('choose')}` :
+                modelValue.name || fileLabel || $t('choose') }}
         </label>
     </div>
 </template>
