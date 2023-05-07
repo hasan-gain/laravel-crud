@@ -49,7 +49,7 @@ onUnmounted(() => {
         document.body.style.paddingRight = ''
     }
 })
-const dynamicAttribute = computed(() => props.staticBackdrop ? 'data-bs-backdrop' : '');
+const dynamicAttribute = computed((): string => props.staticBackdrop ? 'data-bs-backdrop' : '');
 
 
 </script>

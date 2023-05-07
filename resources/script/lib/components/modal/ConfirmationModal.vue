@@ -52,15 +52,15 @@ const emit = defineEmits([
     'cancelled',
 ]);
 
-const handleModalClose = () => {
+const handleModalClose = (): void => {
     emit('modal-closed');
 }
 
-const handleCancellation = () => {
+const handleCancellation = (): void => {
     emit('cancelled');
 }
 
-const handleConfirmation = () => {
+const handleConfirmation = (): void => {
     emit('confirmed');
 }
 

@@ -44,7 +44,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 const emit = defineEmits(['modal-closed']);
 
-const handleModalClose = () => {
+const handleModalClose = (): void => {
     emit('modal-closed');
 }
 </script>
