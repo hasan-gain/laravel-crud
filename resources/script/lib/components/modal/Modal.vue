@@ -1,9 +1,10 @@
 <template>
     <AppModal 
         v-bind="$props"
+        @modal-closed="handleModalClose"
     >
         <template #modal-header>
-            <p class="modal-title fs-4" id="exampleModalLabel">{{headerText}}</p>
+            <h4 class="modal-title" id="exampleModalLabel">{{headerText}}</h4>
         </template>
 
         <template #modal-body>
@@ -11,7 +12,7 @@
         </template>
 
         <template #modal-footer>
-            <button type="button" class="btn btn-secondary">Close</button>
+            <button type="button" class="btn btn-secondary" @click="handleModalClose">Close</button>
         </template>
     </AppModal>
     
@@ -41,7 +42,11 @@ const props = withDefaults(defineProps<Props>(), {
     scrollable: true,
     headerText: 'Modal header'
 });
+const emit = defineEmits(['close-modal']);
 
+const handleModalClose = () => {
+    emit('close-modal');
+}
 </script>
 
 <style scoped>

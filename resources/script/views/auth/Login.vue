@@ -145,11 +145,13 @@
     <!-- /> -->
     <Modal
         id="my-modal-id"
+        v-if="showModal"
+        @close-modal="handleModalClose"
     >
         <div>
-            <h1>
+            <p>
                 this is some body text 
-            </h1>
+            </p>
         </div> 
     </Modal>
 
@@ -168,6 +170,9 @@ const authStore = useAuthStore()
 const { loading } = storeToRefs(authStore)
 
 const showModal = ref<boolean>(true);
+const handleModalClose = () => {
+    showModal.value = false;
+}
 
 
 
