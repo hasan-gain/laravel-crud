@@ -44,7 +44,7 @@ const invalid = (event) => {
 </script>
 
 <template>
-    <input type="email" class="form-control" :class="inputClass" :value="modelValue" :id="id" :name="name"
+    <input type="email" class="form-control" :class="inputClass" :value="modelValue" :id="id" :name="name" v-on="$attrs"
         :autocomplete="autocomplete" :readonly="readonly" :disabled="disabled" :placeholder="placeholder"
         @invalid.prevent="invalid" :required="required" :maxlength="maxlength || 524288" :minlength="minlength"
         @input="update($event)" />

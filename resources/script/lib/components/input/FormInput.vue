@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { InputListItem, InputOption } from '@/types/component/input';
-import { ref, toRef, watch } from 'vue';
-import AppInput from './index.vue';
+import { ref, watch } from 'vue'
+import type { InputListItem, InputOption } from '@/types/component/input'
+import AppInput from './index.vue'
 
-export interface FormInputProps {
+export interface Props {
     type: 'text' | 'password' | 'email' | 'number' | 'search' | 'radio' | 'select' | 'checkbox' | 'switch' | 'textarea' | 'file' | 'image-uploader'
     modelValue?: any
     id?: string
@@ -22,46 +22,51 @@ export interface FormInputProps {
     textAreaRows?: number
     listValueField?: string
     labelClass?: string
-
     label?: string
-    errorMessage?: string
+    error?: string
+    multiple?: boolean
+    fileLabel?: string
 }
 
-const props = withDefaults(defineProps<FormInputProps>(), {
-    errorMessage: 'default value'
-});
-const emit = defineEmits(['update:modelValue', 'change']);
+const props = withDefaults(defineProps<Props>(), {})
+const input = ref<HTMLDivElement | null>(null)
 
+const emit = defineEmits(['update:modelValue', 'change', 'update:error'])
+const serverError = ref(false)
 
-const inputInvalid = ref<boolean>(false);
-const handleAppInputChange = (newChangedValue: any): void => {
-    emit('update:modelValue', newChangedValue);
-    emit('change', newChangedValue);
-}
-const handleInvalidInput = (): void => {
-    console.log('this is running');
-    inputInvalid.value = true;
+const change = (value: any): void => {
+    emit('update:error', '')
+    emit('update:modelValue', value)
+    emit('change', value)
 }
 
-watch(() => props.errorMessage, (newErrorMessage: string) => {
-    if (!newErrorMessage) return;
-    inputInvalid.value = true;
-});
+const invalid = (): void => {
+    setErrorMessage()
+}
+
+const setErrorMessage = (errorMessage?: string, serverError?) => {
+    emit('update:error', errorMessage || props.options?.errorMessage || `${props.type} invalid`)
+}
+
+// const makeInvalid = () => {
+//     serverError.value = true
+//     let inputElement: HTMLInputElement | null | undefined = input.value?.querySelector('input')
+//     inputElement?.setCustomValidity('server error')
+//     inputElement?.checkValidity()
+// }
 
 </script>
 
 <template>
-    <div>
-        <label v-if="label" :for="id">{{label}}</label>
-        <app-input 
-            @change="handleAppInputChange"
-            @invalid="handleInvalidInput"
-            v-bind="$props" 
-        />
-        <div v-if="inputInvalid" :key="'error'">
-            <small class="text-danger validation-error">
-                {{ errorMessage }}
-            </small>
+    <div class="row" ref="input">
+        <div class="col">
+            <label v-if="label" :for="id">{{ label }}</label>
+            <app-input @change="change" @invalid="invalid" v-bind="$props" v-on="$attrs" />
+            <div v-if="error" :key="'error'">
+                <small class="text-danger validation-error">
+                    {{ error }}
+                </small>
+            </div>
         </div>
     </div>
 </template>

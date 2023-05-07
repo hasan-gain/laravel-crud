@@ -1,15 +1,19 @@
 <script lang="ts" setup>
 import { reactive } from 'vue';
 import AppInput from '@/lib/components/input/index.vue'
+import FormInput from '@/lib/components/input/FormInput.vue'
+
 const formData = reactive<any>({
-    gender: 'http://readykit.test/images/logo.png'
+    logo: 'http://readykit.test/images/logo.png',
+    email: '',
+    password: ''
 })
 
 // state
-const errors = reactive({})
+const errors = reactive<any>({})
 
 const change = (e) => {
-    console.log(e)
+    // console.log(e)
 }
 
 const submit = (event) => {
@@ -18,12 +22,11 @@ const submit = (event) => {
     for (var item of list) {
         console.dir(item.name);
     }
-
-    errors['name'] = ''
-    errors['password'] = ''
     const formData = new FormData(event?.target)
-    console.log(formData.get('name'));
-    console.log(formData.get('password'));
+    // console.log(formData.get('email'));
+    // console.log(formData.get('password'));
+    errors.logo = 'Size exet'
+    errors.password = 'Min 8'
 }
 </script>
 
@@ -31,37 +34,18 @@ const submit = (event) => {
     <div class="content-wrapper">
         <div>Dashboard</div>
         <div>{{ $t('test') }}</div>
-        <div class="d-flex flex-column bg-white p-3">
-            <form @submit.prevent="submit" novalidate>
+        <div class="d-flex flex-column card card-body border-0">
+            <form @submit.prevent="submit">
                 <div class="row justify-content-center">
-                    <div class="col-7">
+                    <div class="col-12 col-md-5">
                         <div class="d-flex flex-column gap-y-2">
-                            <!-- <div>
-                                <app-input v-model="formData.text" type="search" input-class="border border-danger"
-                                    id="name" name="name" @invalid="errors['name'] = 'Enter name properly'" :options="{}"
-                                    required autocomplete="off" placeholder="User ID" />
-                                <small class="text-danger">{{ errors['name'] }}</small>
-                            </div>
-                            <div>
-                                <app-input v-model="formData.password" type="number" name="age" :minlength="6"
-                                    @invalid="errors['age'] = 'Age required'"
-                                    :options="{ errorClass: 'border-danger--importent' }" placeholder="Age" required />
-                                <small class="text-danger">{{ errors['age'] }}</small>
-                            </div>
-                            <div>
-                                <app-input v-model="formData.email" type="email" name="email" :minlength="6"
-                                    @invalid="errors['email'] = 'Email Envalid'"
-                                    :options="{ errorClass: 'border-danger--importent' }" placeholder="admin@demo.com"
-                                    required />
-                                <small class="text-danger">{{ errors['email'] }}</small>
-                            </div> -->
-                            <div>
-                                <app-input v-model="formData.gender" type="image-uploader" name="gender" @change="change"
-                                    placeholder="Text area text" input-class=""
-                                    @invalid="errors['gender'] = 'Select gender'"
-                                    :options="{ errorClass: 'border-danger--importent' }"
-                                    :list="[{ id: 1, value: 'male' }, { id: 2, value: 'female' }]" required />
-                                <small class="text-danger">{{ errors['gender'] }}</small>
+                            <div class="d-flex flex-column gap-3">
+                                <form-input v-model="formData.logo" v-model:error="errors.logo" type="file" multiple
+                                    file-label="Select files" name="logo" placeholder="Select image" input-class=""
+                                    :options="{ errorMessage: 'Logo invalid' }" required />
+                                <form-input v-model="formData.password" v-model:error="errors.password" type="text"
+                                    @keyup="change" name="email" placeholder="Min: 8" input-class=""
+                                    @invalid="errors['gender'] = 'Select gender'" :options="{}" required />
                             </div>
                             <hr class="w-100">
                             <input class="btn btn-success" type="submit" value="Submit">
@@ -70,17 +54,6 @@ const submit = (event) => {
                     </div>
                 </div>
             </form>
-            <!-- <app-input v-model="formData.password" type="password" />
-            <app-input v-model="formData.email" type="email" />
-            <app-input v-model="formData.number" type="number" />
-            <app-input v-model="formData.search" type="search" />
-            <app-input v-model="formData.radio" type="radio" />
-            <app-input v-model="formData.select" type="select" />
-            <app-input v-model="formData.checkbox" type="checkbox" />
-            <app-input v-model="formData.switch" type="switch" />
-            <app-input v-model="formData.textarea" type="textarea" />
-            <app-input v-model="formData.file" type="file" />
-            <app-input v-model="formData.ImageUploader" type="image-uploader" /> -->
         </div>
     </div>
 </template>
