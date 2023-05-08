@@ -4,22 +4,20 @@
         :vertically-centered="true"
         :static-backdrop="true"
         :body-class="'d-flex justify-content-center'"
-        @modal-closed="handleModalClose"
     >
         <template #modal-body>
             <div class="d-flex flex-column justify-content-around align-items-center">
                 <app-icon 
-                    :type="icon" 
-                    class="text-icon"
-                    :size="100" 
-                    :stroke="iconStroke"
+                    :type="icon || 'alert-circle'" 
+                    :class="`text-${options?.modalClass || 'danger'}`"
+                    :size="options?.iconSize || 72"
                 />
                 <h3 class="text-center">
-                    {{ prompt }}
+                    {{ prompt || $t('are_you_sure') }}
                 </h3>
                 <div class="control-btns w-100 d-flex justify-content-around align-items-center">
-                    <button class="btn btn-primary" @click="handleConfirmation">{{firstBtnText}}</button>
-                    <button class="btn btn-danger" @click="handleCancellation">{{secondBtnText}}</button>
+                    <button class="btn btn-primary" @click="handleConfirmation">{{ options?.confirmBtnText || $t('confirm') }}</button>
+                    <button class="btn btn-danger" @click="handleCancellation">{{ options?.cancelBtnText || $t('cancel') }}</button>
                 </div>
             </div>
         </template>
@@ -28,33 +26,27 @@
 
 <script setup lang="ts">
 import AppModal from './index.vue';
+ 
+interface ModalOptions {
+    iconSize?: number,
+    confirmBtnText?: string;
+    cancelBtnText?: string;
+    modalClass?: 'primary' | 'danger' | 'success' | 'warning' | 'info',
+}
 
 interface Props {
     id: string;
     prompt?: string;
-    firstBtnText?: string;
-    secondBtnText?: string;
     icon?: string;
-    iconStroke?: string;
+    options?: ModalOptions;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-    prompt: 'Are you sure?',
-    firstBtnText: 'Yes',
-    secondBtnText: 'No',
-    icon: 'alert-circle',
-    iconStroke: 'red'
-});
+const props = defineProps<Props>();
 
 const emit = defineEmits([
-    'modal-closed',
     'confirmed',
     'cancelled',
 ]);
-
-const handleModalClose = (): void => {
-    emit('modal-closed');
-}
 
 const handleCancellation = (): void => {
     emit('cancelled');
