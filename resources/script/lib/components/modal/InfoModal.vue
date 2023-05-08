@@ -2,8 +2,9 @@
     <AppModal 
         :id="id"
         :vertically-centered="true"
-        :static-backdrop="true"
+        :static-backdrop="options?.staticBackdrop !== undefined ? options?.staticBackdrop : true"
         :body-class="'d-flex justify-content-center'"
+        @modal-closed="closeModal"
     >
         <template #modal-body>
             <div class="d-flex flex-column justify-content-around align-items-center">
@@ -13,11 +14,10 @@
                     :size="options?.iconSize || 72"
                 />
                 <h3 class="text-center">
-                    {{ prompt || $t('are_you_sure') }}
+                    {{ prompt || $t('piece_of_information') }}
                 </h3>
                 <div class="control-btns w-100 d-flex justify-content-around align-items-center">
-                    <button data-bs-dismiss="modal" :class="`btn btn-${ options?.modalClass || 'primary' }`" @click="handleConfirmation">{{ options?.confirmBtnText || $t('confirm') }}</button>
-                    <button data-bs-dismiss="modal" class="btn btn-danger" @click="handleCancellation">{{ options?.cancelBtnText || $t('cancel') }}</button>
+                    <button data-bs-dismiss="modal" :class="`btn btn-${ options?.modalClass || 'primary' }`" @click="closeModal">{{ options?.btnText || $t('Okay') }}</button>
                 </div>
             </div>
         </template>
@@ -29,9 +29,9 @@ import AppModal from './index.vue';
  
 interface ModalOptions {
     iconSize?: number,
-    confirmBtnText?: string;
-    cancelBtnText?: string;
+    btnText?: string;
     modalClass?: 'primary' | 'danger' | 'success' | 'warning' | 'info',
+    staticBackdrop?: boolean
 }
 
 interface Props {
@@ -42,20 +42,11 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+const emit = defineEmits(['modal-closed']);
 
-const emit = defineEmits([
-    'confirmed',
-    'cancelled',
-]);
-
-const handleCancellation = (): void => {
-    emit('cancelled');
+const closeModal = (): void => {
+    emit('modal-closed');
 }
-
-const handleConfirmation = (): void => {
-    emit('confirmed');
-}
-
 </script>
 
 <style scoped>

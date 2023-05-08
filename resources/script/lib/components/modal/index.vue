@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, onMounted, onUnmounted, reactive, ref, toRefs } from 'vue';
+import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
 import { Modal } from 'bootstrap'
 const emit = defineEmits<{
     (e: "modal-opened"): void;
@@ -19,7 +19,9 @@ interface Props {
     footerClass?: string;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+    staticBackdrop: true
+});
 
 function emitModalEvents(): void {
     const modal = document.getElementById(props.id)!
@@ -42,7 +44,7 @@ onUnmounted(() => {
         document.body.style.paddingRight = ''
     }
 })
-const dynamicAttribute = computed((): string => !props.staticBackdrop ? 'data-bs-backdrop' : '');
+const dynamicAttribute = computed((): string => props.staticBackdrop ? 'data-bs-backdrop' : '');
 const modalDialogExtensionClasses = reactive({
     'modal-dialog-scrollable': props.scrollable || true,
     'modal-dialog-centered': props.verticallyCentered,

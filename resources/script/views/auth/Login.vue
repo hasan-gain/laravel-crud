@@ -124,7 +124,6 @@
                                 </button>
                                 <button
                                     class="btn btn-info w-100 mt-3"
-                                    v-if="!showModal"
                                     @click="showModal = true"
                                 >
                                     Open modal
@@ -174,22 +173,30 @@
     <!--         Modal body content -->
     <!--     </div> -->
     <!-- </Modal> -->
-    <AppModal 
+
+    <!-- <AppModal  -->
+    <!--     id="my-modal-id" -->
+    <!-- > -->
+    <!--     <template #modal-header> -->
+    <!--         <h4 class="modal-title" id="exampleModalLabel">header text</h4> -->
+    <!--     </template> -->
+    <!---->
+    <!--     <template #modal-body> -->
+    <!--         <div>Modal body</div> -->
+    <!--     </template> -->
+    <!---->
+    <!--     <template #modal-footer> -->
+    <!--         <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">Close</button> -->
+    <!--     </template> -->
+    <!--  -->
+    <!-- </AppModal> -->
+
+    <InfoModal
         id="my-modal-id"
-    >
-        <template #modal-header>
-            <h4 class="modal-title" id="exampleModalLabel">header text</h4>
-        </template>
-
-        <template #modal-body>
-            <div>Modal body</div>
-        </template>
-
-        <template #modal-footer>
-            <button type="button" class="btn btn-secondary">Close</button>
-        </template>
-    
-    </AppModal>
+        v-if="showModal"
+        @modal-closed="showModal = false"
+        :options="{modalClass: 'info', btnText: $t('Understood'), staticBackdrop: false}"
+    />
 </template>
 
 <script setup lang="ts">
@@ -201,6 +208,7 @@ import { ref } from "vue";
 import ConfirmationModal from "@/lib/components/modal/ConfirmationModal.vue";
 import Modal from "@/lib/components/modal/Modal.vue";
 import AppModal from "@/lib/components/modal/index.vue";
+import InfoModal from "@/lib/components/modal/InfoModal.vue";
 import FormInput from "@/lib/components/input/FormInput.vue";
 const authStore = useAuthStore();
 const { loading } = storeToRefs(authStore);
