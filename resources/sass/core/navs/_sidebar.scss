@@ -118,7 +118,7 @@
             display: inline-block;
             color: $sidebar-dark-menu-color;
             transition: $action-transition-duration $action-transition-timing-function;
-            font: normal normal 700 $sidebar-arrow-font-size/1 'Font Awesome 5 Free';
+            font: normal normal 700 calc($sidebar-arrow-font-size/1) 'Font Awesome 5 Free';
 
             .rtl & {
               margin-left: 0;
