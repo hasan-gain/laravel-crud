@@ -32,8 +32,8 @@
 }
 
 .py-half-primary {
-  padding-top: $default-padding-margin/2 !important;
-  padding-bottom: $default-padding-margin/2 !important;
+  padding-top: calc($default-padding-margin/2) !important;
+  padding-bottom: calc($default-padding-margin/2) !important;
 }
 
 .m-primary {
