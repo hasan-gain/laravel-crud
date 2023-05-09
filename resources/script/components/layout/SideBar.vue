@@ -44,9 +44,9 @@ import { onMounted, watch } from 'vue'
 import { useAppStore } from '@/store/application'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
-import type { SidebarMenu } from '@/types/sidebar'
+import type { ISidebarMenu } from '@/types/sidebar'
 interface Props {
-    data: SidebarMenu[]
+    data: ISidebarMenu[]
     logoSrc: string
     logoIconSrc: string
     logoUrl: string
@@ -59,11 +59,11 @@ const { leftMenu } = storeToRefs(useAppStore())
 const route = useRoute()
 
 // methods
-const isActive = <boolen>(item: SidebarMenu) => {
+const isActive = <boolen>(item: ISidebarMenu) => {
     if (item.subMenu) return item.subMenu.some(sub => sub.url === location.pathname)
     else return ((item.id ? '#' + item.id : item.url || '') === location.pathname)
 }
-const isShow = <boolen>(item: SidebarMenu) => {
+const isShow = <boolen>(item: ISidebarMenu) => {
     return !!(item.subMenu?.some(sub => sub.url === location.pathname) && leftMenu.value === 'normal')
 }
 

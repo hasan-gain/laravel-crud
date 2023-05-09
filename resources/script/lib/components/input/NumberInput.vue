@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { InputOption } from '@/types/component/input'
+import type { IInputOption } from '@/lib/components/input'
 
 interface Props {
     modelValue: string
@@ -13,7 +13,7 @@ interface Props {
     inputClass?: string
     maxlength?: number
     minlength?: number
-    options?: InputOption
+    options?: IInputOption
 }
 
 const props = withDefaults(defineProps<Props>(), {

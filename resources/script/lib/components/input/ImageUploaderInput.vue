@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, reactive } from 'vue';
-import type { InputOption } from '@/types/component/input'
+import type { IInputOption } from '@/lib/components/input'
 
 interface Props {
     modelValue: any
@@ -12,7 +12,7 @@ interface Props {
     placeholder?: string
     required?: boolean
     inputClass?: string
-    options?: InputOption
+    options?: IInputOption
     fileLabel?: string
 }
 

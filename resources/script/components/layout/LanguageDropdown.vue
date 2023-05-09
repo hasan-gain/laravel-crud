@@ -16,10 +16,10 @@
 </template>
 
 <script lang="ts" setup>
-import type { Locale } from '@/types/application'
+import type { ILocale } from '@/types/application'
 interface Props {
     selectedLanguage: string
-    data: Locale[]
+    data: ILocale[]
 }
 const props = defineProps<Props>()
 

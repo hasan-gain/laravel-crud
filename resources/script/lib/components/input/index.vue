@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { InputListItem, InputOption } from '@/types/component/input'
+import type { IInputListItem, IInputOption } from '@/lib/components/input'
 
 // components
 import TextInput from './TextInput.vue'
@@ -28,8 +28,8 @@ interface Props {
     inputClass?: string
     maxlength?: number
     minlength?: number
-    options?: InputOption
-    list?: InputListItem[]
+    options?: IInputOption
+    list?: IInputListItem[]
     textAreaCols?: number
     textAreaRows?: number
     listValueField?: string

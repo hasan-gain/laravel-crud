@@ -1,8 +1,7 @@
-export interface ObjectResponse {
-
+export interface IObjectResponse {
 }
-export interface ArrayResponse { }
-export interface ArrayResponseWithPagination {
+export interface IArrayResponse { }
+export interface IArrayResponseWithPagination {
     data: any[]
     from: number
     last_page: number
