@@ -1,11 +1,11 @@
-import type { User } from '@/types/user'
+import type {IUser } from '@/types/user'
 
-export interface Login {
+export interface ILogin {
     token: string
     data: {
         access_token: string
         token_type: string
-        user: User
+        user: IUser
         message: string
         success: boolean
     }

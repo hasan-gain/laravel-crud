@@ -14,12 +14,12 @@
 </template>
 
 <script setup lang="ts">
-import type { TabOptions } from "@/types/tabs"
+import type { ITabOptions } from "@/lib/components/tabs"
 // components
-import TabWrapper from '@/lib/components/tabs/TabWrapper.vue'
-import Tab from '@/lib/components/tabs/Tab.vue'
+import TabWrapper from '@/lib/components/tabs/horizontal/TabWrapper.vue'
+import Tab from '@/lib/components/tabs/horizontal/Tab.vue'
 interface Props {
-    options: TabOptions
+    options: ITabOptions
 }
 const props = defineProps<Props>()
 </script>

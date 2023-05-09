@@ -6,11 +6,12 @@
 
 <script setup lang="ts">
 import { ref, shallowRef, defineAsyncComponent } from "vue"
-import Tabs from '@/lib/components/tabs/Tabs.vue'
-import type { TabOptions } from "@/types/tabs"
+import Tabs from '@/lib/components/tabs/horizontal/Tabs.vue'
+import type { ITabOptions } from "@/lib/components/tabs"
 const TestComponent = shallowRef(defineAsyncComponent(() => import('./Test.vue')))
-const options = ref<TabOptions>({
+const options = ref<ITabOptions>({
     tabId: 'test-tabs',
+    alignment: 'horizontal',
     tabs: [
         {
             name: 'tab1',

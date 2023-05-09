@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { InputOption, InputListItem } from '@/types/component/input'
+import type { IInputOption, IInputListItem } from '@/lib/components/input'
 
 interface Props {
     modelValue: string
@@ -13,8 +13,8 @@ interface Props {
     inputClass?: string
     maxlength?: number
     minlength?: number
-    options?: InputOption
-    list?: InputListItem[]
+    options?: IInputOption
+    list?: IInputListItem[]
     listValueField?: string
     labelClass?: string
 }

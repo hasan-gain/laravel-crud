@@ -1,52 +1,3 @@
-<!-- <template>
-    <vertical-tab
-        v-if="type === 'vertical'"
-        :tabs="tabs" :icon="icon"
-        :query-string="queryString"
-    />
-    <horizontal-tab
-        v-else
-        :tabs="tabs"
-        :query-string="queryString"
-        :bodyClass="bodyClass"
-        :tabClass="tabClass"
-    />
-</template>
-<script>
-import VerticalTab from "./VerticalTab";
-import HorizontalTab from "./HorizontalTab";
-
-export default {
-    name: "AppTab",
-    components: {HorizontalTab, VerticalTab},
-    props: {
-        tabs: {
-            type: Array,
-            require: true
-        },
-        type: {
-            type: String,
-            default: 'vertical'
-        },
-        icon: {
-            type: String
-        },
-        queryString: {
-            type: Boolean,
-            default: true
-        },
-        tabClass: {
-            type: String,
-            default: 'p-primary'
-        },
-        bodyClass: {
-            type: String,
-            default: 'p-primary'
-        }
-    }
-}
-</script> -->
-
 <template>
     <div class="hover-scroll-x">
         <div class="d-grid">
@@ -66,13 +17,13 @@ export default {
 </template>
 <script setup lang="ts">
 import { ref, provide, onMounted, watch } from 'vue'
-import type { TabOptions, TabItem } from "@/types/tabs"
+import type { ITabOptions, ITabItem } from "@/lib/components/tabs"
 interface Props {
-    options: TabOptions
+    options: ITabOptions
 }
 const props = defineProps<Props>()
 const tabs = ref(props.options.tabs)
-const selectedTab = ref<TabItem>()
+const selectedTab = ref<ITabItem>()
 provide('selectedTab', selectedTab)
 watch(() => selectedTab.value, (n: any, o: any) => {
     if (o?.out) o.out()

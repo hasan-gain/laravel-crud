@@ -1,9 +1,9 @@
-export interface InputOption {
+export interface IInputOption {
     errorClass?: string
     showPasswordEye?: boolean
     errorMessage?: string
 }
-export interface InputListItem {
+export interface IInputListItem {
     id: number | string
     value: string
     disabled?: boolean

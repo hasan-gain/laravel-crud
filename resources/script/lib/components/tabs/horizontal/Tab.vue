@@ -8,7 +8,10 @@
 
 <script setup lang="ts">
 import { inject } from 'vue'
-import type { TabItem } from '@/types/tabs'
-const porps = defineProps<{ tab: TabItem }>()
-const selectedTab = inject<TabItem>('selectedTab')
+import type { ITabItem } from '@/lib/components/tabs'
+interface Props {
+    tab: ITabItem
+}
+const porps = defineProps<Props>()
+const selectedTab = inject<ITabItem>('selectedTab')
 </script>
