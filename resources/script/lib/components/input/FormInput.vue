@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import type { InputListItem, InputOption } from '@/types/component/input'
+import { ref } from 'vue'
+import type { IInputListItem, IInputOption } from '@/lib/components/input'
 import AppInput from './index.vue'
 
 export interface Props {
@@ -16,8 +16,8 @@ export interface Props {
     inputClass?: string
     maxlength?: number
     minlength?: number
-    options?: InputOption
-    list?: InputListItem[]
+    options?: IInputOption
+    list?: IInputListItem[]
     textAreaCols?: number
     textAreaRows?: number
     listValueField?: string

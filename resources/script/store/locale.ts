@@ -1,13 +1,13 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { Locale } from '@/types/application'
+import type { ILocale } from '@/types/application'
 import i18n from '@/i18n'
 import { setI18nLanguage } from '@/i18n'
 
 export const useLocaleStore = defineStore('locale', () => {
     // state
     const locale = ref<string>(localStorage.locale || 'en')
-    const localesList = ref<Locale[]>([])
+    const localesList = ref<ILocale[]>([])
 
     const init = async () => {
         try {
@@ -17,7 +17,7 @@ export const useLocaleStore = defineStore('locale', () => {
         }
     }
 
-    const setLocalList = (list: Locale[]) => {
+    const setLocalList = (list: ILocale[]) => {
         localesList.value = list
     }
 

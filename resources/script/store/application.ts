@@ -5,15 +5,15 @@ import { useLocaleStore } from '@/store/locale'
 import { sidebarResponse } from '@/api/application'
 import i18n from '@/i18n'
 import { loadLocaleMessages } from '@/i18n'
-import type { Settings } from '@/types/application'
-import type { SidebarMenu } from '@/types/sidebar'
+import type { ISettings } from '@/types/application'
+import type { ISidebarMenu } from '@/types/sidebar'
 
 export const useAppStore = defineStore('app', () => {
     // state
     const leftMenu = ref<string>('')
     const loading = ref<boolean>(false)
-    const settings = reactive<Settings>({ company_banner: '', company_icon: '', company_logo: '', company_name: '', time_format: 'h', time_zone: '', default_language: localStorage.locale, date_format: '', currency_symbol: '', currency_position: '', thousand_separator: ',' })
-    const sidebar = reactive<SidebarMenu[]>(sidebarResponse)
+    const settings = reactive<ISettings>({ company_banner: '', company_icon: '', company_logo: '', company_name: '', time_format: 'h', time_zone: '', default_language: localStorage.locale, date_format: '', currency_symbol: '', currency_position: '', thousand_separator: ',' })
+    const sidebar = reactive<ISidebarMenu[]>(sidebarResponse)
     const localeStore = useLocaleStore()
 
     // methods

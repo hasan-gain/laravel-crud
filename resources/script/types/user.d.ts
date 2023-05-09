@@ -1,6 +1,6 @@
-import type { Role } from '@/types/role'
+import type { IRole } from '@/types/role'
 
-export interface Profile {
+export interface IProfile {
     id: number
     user_id: number
     gender: string
@@ -10,13 +10,13 @@ export interface Profile {
     date_of_birth: string
 }
 
-export interface ProfilePicture {
+export interface IProfilePicture {
     id: number
     full_url: string
     path: string
 }
 
-export interface User {
+export interface IUser {
     id: 1
     first_name: string
     last_name: string
@@ -26,7 +26,7 @@ export interface User {
     last_login_at: string | null
     profile: Profile | null
     profile_picture: ProfilePicture | null
-    roles: Role[]
+    roles: IRole[]
     created_at: string | null
     created_by: string | null
     updated_at: string | null
