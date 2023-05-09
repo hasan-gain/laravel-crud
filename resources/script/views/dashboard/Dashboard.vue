@@ -5,19 +5,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref, shallowRef, defineAsyncComponent } from "vue"
-import Tabs from '@/lib/components/tabs/horizontal/Tabs.vue'
+import { ref, markRaw } from "vue"
+import Tabs from '@/lib/components/tabs/Index.vue'
 import type { ITabOptions } from "@/lib/components/tabs"
-const TestComponent = shallowRef(defineAsyncComponent(() => import('./Test.vue')))
+import Test from "@/views/dashboard/Test.vue"
 const options = ref<ITabOptions>({
     tabId: 'test-tabs',
-    alignment: 'horizontal',
+    icon: 'settings',
+    alignment: 'vertical',
     tabs: [
         {
             name: 'tab1',
             type: 'html',
+            icon: 'send',
             component: `<div>Tab 1</div>`,
             tabTitle: 'Tab one',
+            actions: [
+                { name: 'Action1', fire:() => { console.log('action1')}, class: 'btn-success', icon: 'send' },
+                { name: 'Action2', fire:() => { console.log('action2')} },
+            ],
             in: () => {
                 console.log('in 1')
             },
@@ -27,8 +33,8 @@ const options = ref<ITabOptions>({
         },
         {
             name: 'tab2',
-            type: 'compoent',
-            component: TestComponent,
+            type: 'component',
+            component: markRaw(Test),
             props: {
                 name: 'Shishir'
             },
