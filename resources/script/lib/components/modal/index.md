@@ -1,6 +1,6 @@
-# AppModal
+## AppModal
 
-The `<AppModal/>` component is an implementation of a bootstrap modal that can be extended with named slots, as shown below in usage
+The `<AppModal/>` component is an implementation of a bootstrap modal that can be extended with named slots, as shown below in usage.  
 This component will mostly be used to create custom modals within your application.
 
 
@@ -24,7 +24,6 @@ This component will mostly be used to create custom modals within your applicati
 </AppModal>
 ```
 
-**The `data-bs-dismiss="modal"` attribute is required for the close button**
 
 
 
@@ -63,7 +62,11 @@ The `<AppModal/>` component emits a `modal-opened` and a `modal-closed` event.
 The `modal-opened` and the `modal-closed` events are fired when the component mounts and unmounts respectively  
   
 
-**The following components were all built on top of the `<AppModal />` component.**  
+**The following components listed after this point were all built on top of the `<AppModal />` component.**    
+
+
+
+
 
 # Modal
 
@@ -128,6 +131,8 @@ The `modal-opened` and the `modal-closed` events are also fired when the compone
 
 # ConfirmationModal
 
+A simple headerless and footerless component that takes in a yes/no input from the user
+
 ### Usage
 ```vue
 <ConfirmationModal
@@ -165,7 +170,7 @@ interface Props {
 | cancelBtnText | Text content for the cancel button | `'cancel'`
 | modalClass | Bootstrap class that determines icon and confirm button color | `'danger'`
 
-#### Confirmation modal options
+#### Options interface
 ```ts
 interface ModalOptions {
     iconSize?: number,
@@ -178,3 +183,72 @@ interface ModalOptions {
 ### Events
 
 The confirmation modal emits one of two events, `confirm` or `cancel` depending on user input.
+
+
+
+# InfoModal
+
+Much like the confirmation modal, this component is also without a header and a footer.  
+However this component only has a single 'Okay' button.
+
+### Usage
+```vue
+<InfoModal
+    id="my-modal-id"
+    v-if="showModal"
+    @modal-closed="showModal = false"
+/>
+```
+
+### Props
+
+| Name | Required | Usage | Default |
+| ----   | -------- | ----- | ------- |
+| id     | Yes | Serves as a unique modal ID | None
+| prompt | No  | Confirmation prompt         | `'Are you sure?'`
+| icon | No  | Modal icon | `'alert-circle'`
+| options | No  | Further configuration | Shown below
+
+#### Prop types
+```ts
+interface Props {
+    id: string;
+    prompt?: string;
+    icon?: string;
+    options?: ModalOptions;
+}
+```
+
+##### Options
+| Name | Usage | Default |
+| ---- | ---- | ---- |
+| iconSize | Determines the size of the modal icon | 72
+| btnText | Text content for the modal button | 72
+| modalClass | Bootstrap class that determines icon and confirm button color | `'danger'`
+| staticBackdrop  | No      | Backdrop click will close the modal if set to `true` | `true`
+
+#### Options interface
+```ts
+interface ModalOptions {
+    iconSize?: number,
+    btnText?: string;
+    modalClass?: 'primary' | 'danger' | 'success' | 'warning' | 'info',
+    staticBackdrop?: boolean
+}
+```
+
+
+### Events
+
+Similar to some of the previous modal components,  the `<InfoModal/>` component emits a `modal-opened` and a `modal-closed` event.  
+
+The `modal-opened` and the `modal-closed` events are also fired when the component mounts and unmounts respectively  
+
+
+
+#### Certain things to be aware of
+
+<!-- **The `data-bs-dismiss="modal"` attribute is required for the close button** -->
+* **The `modal-closed` event must always be listened for when available**  
+
+	When you are attempting to close your modal, you have to 

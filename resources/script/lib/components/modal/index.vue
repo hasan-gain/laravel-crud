@@ -10,7 +10,7 @@ const modal = ref<Modal | any>(null)
 
 interface Props {
     id: string;
-    size?: 'xl' | 'lg' | 'sm' | 'fullscreen';
+    size?: 'xl' | 'lg' | 'sm' | 'fullscreen' | '';
     staticBackdrop?: boolean;
     verticallyCentered?: boolean;
     scrollable?: boolean;

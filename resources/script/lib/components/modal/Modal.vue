@@ -2,6 +2,7 @@
     <AppModal 
         v-bind="$props"
         @modal-closed="handleModalClose"
+        @modal-opened="handleModalOpened"
     >
         <template #modal-header>
             <h4 class="modal-title" id="exampleModalLabel">{{headerText}}</h4>
@@ -23,8 +24,7 @@ import AppModal from  './index.vue';
 
 interface Props {
     id: string;
-    size?: 'xl' | 'lg' | 'sm' | '';
-    fullscreen?: boolean;
+    size?: 'xl' | 'lg' | 'sm' | 'fullscreen' | '';
     staticBackdrop?: boolean;
     verticallyCentered?: boolean;
     scrollable?: boolean;
@@ -42,11 +42,16 @@ const props = withDefaults(defineProps<Props>(), {
     scrollable: true,
     headerText: 'Modal header'
 });
-const emit = defineEmits(['modal-closed']);
+const emit = defineEmits(['modal-closed', 'modal-opened']);
 
 const handleModalClose = (): void => {
     emit('modal-closed');
 }
+
+const handleModalOpened = (): void => {
+    emit('modal-opened');
+}
+
 </script>
 
 <style scoped>

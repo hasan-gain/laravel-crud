@@ -5,6 +5,7 @@
         :static-backdrop="options?.staticBackdrop !== undefined ? options?.staticBackdrop : true"
         :body-class="'d-flex justify-content-center'"
         @modal-closed="closeModal"
+        @modal-opened="handleModalOpen"
     >
         <template #modal-body>
             <div class="d-flex flex-column justify-content-around align-items-center">
@@ -42,11 +43,16 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits(['modal-closed']);
+const emit = defineEmits(['modal-closed', 'modal-opened']);
 
 const closeModal = (): void => {
     emit('modal-closed');
 }
+
+const handleModalOpen = (): void => {
+    emit('modal-opened');
+}
+
 </script>
 
 <style scoped>
