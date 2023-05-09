@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, onMounted, onUnmounted, ref, toRefs } from 'vue';
+import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
 import { Modal } from 'bootstrap'
 const emit = defineEmits<{
     (e: "modal-opened"): void;
@@ -10,8 +10,7 @@ const modal = ref<Modal | any>(null)
 
 interface Props {
     id: string;
-    size?: 'xl' | 'lg' | 'sm' | '';
-    fullscreen?: boolean;
+    size?: 'xl' | 'lg' | 'sm' | 'fullscreen' | '';
     staticBackdrop?: boolean;
     verticallyCentered?: boolean;
     scrollable?: boolean;
@@ -21,11 +20,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    size: '',
-    staticBackdrop: false,
-    verticallyCentered: false,
-    fullscreen: false,
-    scrollable: false
+    staticBackdrop: true
 });
 
 function emitModalEvents(): void {
@@ -50,7 +45,11 @@ onUnmounted(() => {
     }
 })
 const dynamicAttribute = computed((): string => props.staticBackdrop ? 'data-bs-backdrop' : '');
-
+const modalDialogExtensionClasses = reactive({
+    'modal-dialog-scrollable': props.scrollable || true,
+    'modal-dialog-centered': props.verticallyCentered,
+    [`modal-${props.size}`]: !!props.size
+})
 
 </script>
 
@@ -62,7 +61,8 @@ const dynamicAttribute = computed((): string => props.staticBackdrop ? 'data-bs-
         :[dynamicAttribute]="'static'"
     >
         <div 
-            :class="`modal-dialog ${scrollable ? 'modal-dialog-scrollable' : ''} ${fullscreen ? 'modal-fullscreen' : ''} ${verticallyCentered ? 'modal-dialog-centered' : ''} ${size ? 'modal-' + size : ''}`">
+            class="modal-dialog"
+            :class="modalDialogExtensionClasses">
 
             <div class="modal-content">
                 <div v-if="$slots['modal-header']" :class="`modal-header ${headerClass ? headerClass : ''}`">
