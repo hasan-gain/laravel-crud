@@ -1,10 +1,8 @@
 import http from '@/helper/http'
 import type { Settings, LocaleResponse, Locale } from '@/types/application'
 import type { SidebarMenu } from '@/types/sidebar'
-import en from '@/i18n/json/en.json'
-import jp from '@/i18n/json/jp.json'
 
-let sidebar: SidebarMenu[] = [
+export let sidebarResponse: SidebarMenu[] = [
     {
         id: "dashboard-samples",
         icon: "pie-chart",
@@ -81,53 +79,7 @@ let sidebar: SidebarMenu[] = [
     },
     { icon: "credit-card", name: "Payment Method", url: "/app/payment-view", permission: true },
     { icon: "book", name: "Documentation", url: "/app/documentation/index.html", permission: true }]
-let logo = 'https://inlink.gainhq.com/images/default-logo.png'
-let icon = 'https://inlink.gainhq.com/images/default-icon.png'
-export const GET_SETTINGS = () => {
-    return new Promise<Settings>((resolve, reject) => {
-        setTimeout(() => {
-            return resolve({
-                sidebar,
-                logo,
-                icon
-            })
-        }, 1000)
-    })
-}
 
-const locales: Locale[] = [
-    {
-        id: 'en',
-        key: 'en',
-        title: 'English',
-        value: 'English'
-    },
-    {
-        id: 'jp',
-        key: 'jp',
-        title: 'Japanese',
-        value: 'Japanese'
-    },
-]
-
-const messageData = (lan: string) => {
-    if (lan === 'en') return en 
-    else if (lan === 'jp') return jp
-    else return en
-}
-
-export const GET_LOCALES_LIST = () => {
-    return new Promise<Locale[]>((resolve, reject) => {
-        setTimeout(() => {
-            return resolve(locales)
-        }, 500)
-    }) 
-}
-
-export const GET_LOCALE = (language: string) => {
-    return new Promise<LocaleResponse>((resolve, reject) => {
-        setTimeout(() => {
-            return resolve({ messages: messageData(language) })
-        }, 500)
-    })
+export const GET_SETTINGS = (params) => {
+    return http.get<Settings>('/app-setting?' + new URLSearchParams(params).toString())
 }

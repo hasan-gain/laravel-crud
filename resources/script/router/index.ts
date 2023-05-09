@@ -11,12 +11,12 @@ const router: Router = createRouter({
     }
 })
 
-router.beforeResolve(to => {
-    const appStore = useAppStore()
-    return !!(appStore.settings.sidebar.length)
-        ? true
-        : appStore.init().then(settings => true)
-})
+// router.beforeResolve(to => {
+//     const appStore = useAppStore()
+//     return !!(appStore.sidebar.length)
+//         ? true
+//         : appStore.init().then(settings => true)
+// })
 
 router.beforeEach((to, from, next) => {
     if (to.meta.requiredAuth) {

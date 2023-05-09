@@ -8,7 +8,7 @@ import SideBar from '../components/layout/SideBar.vue'
 import PageLoader from '@/lib/components/common/loader/PageLoader.vue'
 // state
 const appStore = useAppStore()
-const { settings, loading } = storeToRefs(appStore)
+const { settings, loading, sidebar } = storeToRefs(appStore)
 
 const logoURL: string = '/app/dashboard'
 </script>
@@ -18,9 +18,10 @@ const logoURL: string = '/app/dashboard'
     <div v-else class="drawer drawer-mobile">
         <div class="container-scroller">
             <!--Top Navbar-->
-            <nav-bar :logo-src="settings.logo" :logo-icon-src="settings.icon" :logo-url="logoURL" />
+            <nav-bar :logo-src="settings.company_logo" :logo-icon-src="settings.company_icon" :logo-url="logoURL" />
             <!--Sidebar-->
-            <side-bar :data="settings.sidebar" :logo-src="settings.logo" :logo-icon-src="settings.icon" :logo-url="logoURL" />
+            <side-bar :data="sidebar" :logo-src="settings.company_logo" :logo-icon-src="settings.company_icon"
+                :logo-url="logoURL" />
             <div class="container-fluid page-body-wrapper">
                 <div class="main-panel">
                     <!--Contents-->

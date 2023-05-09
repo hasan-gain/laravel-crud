@@ -1,4 +1,4 @@
-import type { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import type { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios"
 import { useNProgress } from '@vueuse/integrations/useNProgress'
 
 interface Item {
