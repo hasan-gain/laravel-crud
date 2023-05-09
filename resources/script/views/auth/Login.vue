@@ -155,41 +155,6 @@
             </div>
         </div>
     </div>
-    <!-- <ConfirmationModal -->
-    <!--     id="my-modal-id" -->
-    <!--     v-if="showModal" -->
-    <!--     :options="{ iconSize: 100 }" -->
-    <!--     @confirmed="handleConfirm" -->
-    <!--     @cancelled="handleCancelled" -->
-    <!-- /> -->
-
-    <!-- <Modal -->
-    <!--     id="my-modal-id" -->
-    <!--     v-if="showModal" -->
-    <!--     :fullscreen="true" -->
-    <!--     size="xl" -->
-    <!-- > -->
-    <!--     <div class="modal-body-content"> -->
-    <!--         Modal body content -->
-    <!--     </div> -->
-    <!-- </Modal> -->
-
-    <!-- <AppModal  -->
-    <!--     id="my-modal-id" -->
-    <!-- > -->
-    <!--     <template #modal-header> -->
-    <!--         <h4 class="modal-title" id="exampleModalLabel">header text</h4> -->
-    <!--     </template> -->
-    <!---->
-    <!--     <template #modal-body> -->
-    <!--         <div>Modal body</div> -->
-    <!--     </template> -->
-    <!---->
-    <!--     <template #modal-footer> -->
-    <!--         <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">Close</button> -->
-    <!--     </template> -->
-    <!--  -->
-    <!-- </AppModal> -->
 
     <InfoModal
         id="my-modal-id"

@@ -248,7 +248,10 @@ The `modal-opened` and the `modal-closed` events are also fired when the compone
 
 #### Certain things to be aware of
 
-<!-- **The `data-bs-dismiss="modal"` attribute is required for the close button** -->
 * **The `modal-closed` event must always be listened for when available**  
 
-	When you are attempting to close your modal, you have to 
+	In order to close your modal you *have* to listen for the custom `modal-close` event to change your v-if value to false 
+
+* **The `data-bs-dismiss="modal"` attribute is required for the close button**
+
+    If you're creating a custom modal using the `<AppModal/>` component, be sure to include the aforemention attribute in your close button as demonstrated above
