@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { InputOption } from '@/types/component/input'
+import type { IInputOption } from '@/lib/components/input'
 
 interface Props {
     modelValue: string
@@ -13,7 +13,7 @@ interface Props {
     inputClass?: string
     maxlength?: number
     minlength?: number
-    options?: InputOption
+    options?: IInputOption
 }
 const props = withDefaults(defineProps<Props>(), {
     modelValue: '',
@@ -44,7 +44,7 @@ const invalid = (event) => {
 </script>
 
 <template>
-    <input type="text" class="form-control" :class="inputClass" :value="modelValue" :id="id" :name="name"
+    <input type="text" class="form-control" :class="inputClass" :value="modelValue" :id="id" :name="name" v-on="$attrs"
         :autocomplete="autocomplete" :readonly="readonly" :disabled="disabled" :placeholder="placeholder"
         @invalid.prevent="invalid" :required="required" :maxlength="maxlength || 524288" :minlength="minlength"
         @input="update($event)" />

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { User } from '@/types/user'
+import type { IUser } from '@/types/user'
 // components
 import Avatar from '@/lib/components/common/Avatar.vue'
 
 interface Props {
-    user: User
+    user: IUser
     data: any[]
 }
 

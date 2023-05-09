@@ -1,6 +1,6 @@
-import type { SidebarMenu } from '@/types/sidebar'
+import type { ISidebarMenu } from '@/types/sidebar'
 // export interface Settings { sidebar: SidebarMenu[], logo: string, icon: string }
-export interface Settings {
+export interface ISettings {
     company_banner: string
     company_icon: string
     company_logo: string
@@ -13,10 +13,11 @@ export interface Settings {
     currency_symbol: string
     currency_position: string
     language_file?: {}
-    languages?: Locale[]
+    languages?: ILocale[]
 }
-export interface Locale {
+export interface ILocale {
     key: string
     title: string
 }
-export interface LocaleResponse { messages: {} }
+
+export interface ILocaleResponse { messages: {} }

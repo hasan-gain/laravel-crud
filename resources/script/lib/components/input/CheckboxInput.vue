@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { InputOption, InputListItem } from '@/types/component/input'
+import type { IInputOption, IInputListItem } from '@/lib/components/input'
 
 interface Props {
     modelValue: string
@@ -13,8 +13,8 @@ interface Props {
     inputClass?: string
     maxlength?: number
     minlength?: number
-    options?: InputOption
-    list?: InputListItem[]
+    options?: IInputOption
+    list?: IInputListItem[]
     listValueField?: string
     labelClass?: string
 }
@@ -50,7 +50,7 @@ const invalid = (event) => {
     <div class="app-checkbox-group" :class="inputClass">
         <div class="customized-checkbox checkbox-default" v-for="(item, index) in list" :key="index">
             <input type="checkbox" :name="name" :id="item.id.toString()" :required="required" @invalid.prevent="invalid"
-                :disabled="item.disabled || disabled" :placeholder="placeholder" :value="item.id"
+                v-on="$attrs" :disabled="item.disabled || disabled" :placeholder="placeholder" :value="item.id"
                 :checked="modelValue.split(',').includes(item.id.toString())" @change="update($event)" />
             <label :for="item.id.toString()" :class="labelClass">
                 {{ item[listValueField || 'value'] }}

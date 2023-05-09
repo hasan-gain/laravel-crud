@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import type { InputOption } from '@/types/component/input'
+import { computed, ref, reactive } from 'vue';
+import type { IInputOption } from '@/lib/components/input'
 
 interface Props {
     modelValue: any
@@ -12,9 +12,8 @@ interface Props {
     placeholder?: string
     required?: boolean
     inputClass?: string
-    options?: InputOption
+    options?: IInputOption
     fileLabel?: string
-    multiple?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -64,9 +63,9 @@ const imageUrl = computed<string>(() => {
             <label id="upload-label" :for="id">
                 {{ 'choose' }}
             </label>
-            <input ref="input" :id="id" type="file" :disabled="disabled" :name="name" :multiple="multiple"
-                :required="required" :autocomplete="autocomplete" :placeholder="placeholder" :readonly="readonly"
-                @change="update($event)" @invalid.prevent="invalid" class="form-control d-none" />
+            <input ref="input" :id="id" type="file" :disabled="disabled" :name="name" accept="image/*" :required="required"
+                :autocomplete="autocomplete" :placeholder="placeholder" :readonly="readonly" @change="update($event)"
+                @invalid.prevent="invalid" class="form-control d-none" />
         </div>
     </div>
 </template>

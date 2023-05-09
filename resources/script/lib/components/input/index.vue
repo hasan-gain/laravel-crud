@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { InputListItem, InputOption } from '@/types/component/input'
+import type { IInputListItem, IInputOption } from '@/lib/components/input'
 
 // components
 import TextInput from './TextInput.vue'
@@ -28,8 +28,8 @@ interface Props {
     inputClass?: string
     maxlength?: number
     minlength?: number
-    options?: InputOption
-    list?: InputListItem[]
+    options?: IInputOption
+    list?: IInputListItem[]
     textAreaCols?: number
     textAreaRows?: number
     listValueField?: string
@@ -76,35 +76,35 @@ const fileChange = (event): void => {
     }
     if (files?.length) {
         emit('update:modelValue', props.multiple ? files : files[0])
+        emit('change', props.multiple ? files : files[0])
     }
-    emit('change', target.value)
 }
 
 </script>
 
 <template>
     <text-input v-if="type === 'text'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
-        v-bind="$props" />
+        v-on="$attrs" v-bind="$props" />
     <password-input v-if="type === 'password'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
-        v-bind="$props" />
+        v-on="$attrs" v-bind="$props" />
     <email-input v-if="type === 'email'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
-        v-bind="$props" />
+        v-on="$attrs" v-bind="$props" />
     <number-input v-if="type === 'number'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
-        v-bind="$props" />
+        v-on="$attrs" v-bind="$props" />
     <search-input v-if="type === 'search'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
-        v-bind="$props" />
+        v-on="$attrs" v-bind="$props" />
     <radio-input v-if="type === 'radio'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
-        v-bind="$props" />
+        v-on="$attrs" v-bind="$props" />
     <select-input v-if="type === 'select'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
-        v-bind="$props" />
+        v-on="$attrs" v-bind="$props" />
     <checkbox-input v-if="type === 'checkbox'" :model-value="modelValue" @update="listChange" @invalid="emit('invalid')"
-        v-bind="$props" />
+        v-on="$attrs" v-bind="$props" />
     <switch-input v-if="type === 'switch'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
-        v-bind="$props" />
+        v-on="$attrs" v-bind="$props" />
     <text-area-input v-if="type === 'textarea'" :model-value="modelValue" @update="textChange" @invalid="emit('invalid')"
-        v-bind="$props" />
+        v-on="$attrs" v-bind="$props" />
     <file-input v-if="type === 'file'" :model-value="modelValue" @update="fileChange" @invalid="emit('invalid')"
-        v-bind="$props" />
-    <image-uploader-input v-if="type === 'image-uploader'" :model-value="modelValue" @update="fileChange"
+        v-on="$attrs" v-bind="$props" />
+    <image-uploader-input v-if="type === 'image-uploader'" :model-value="modelValue" @update="fileChange" v-on="$attrs"
         @invalid="emit('invalid')" v-bind="$props" />
 </template>

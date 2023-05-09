@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import type { User } from '@/types/user'
+import type { IUser } from '@/types/user'
 
 import { login, me, logout } from '@/api/auth'
 
 export const useAuthStore = defineStore('auth', () => {
     // state
-    const user = ref<null | User>(null)
+    const user = ref<null | IUser>(null)
     const loading = ref(false)
     const router = useRouter()
 
@@ -29,7 +29,7 @@ export const useAuthStore = defineStore('auth', () => {
     const Login = (event) => {
         loading.value = true
         let formData = new FormData(event.target)
-        login(formData).then(res => {
+        return login(formData).then(res => {
             if (res.statusText === 'OK') {
                 localStorage.setItem('token', res.data.data.access_token)
             }
