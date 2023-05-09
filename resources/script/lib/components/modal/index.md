@@ -158,7 +158,7 @@ interface Props {
     id: string;
     prompt?: string;
     icon?: string;
-    options?: ModalOptions;
+    options?: IConfirmationModalOptions;
 }
 ```
 
@@ -170,9 +170,9 @@ interface Props {
 | cancelBtnText | Text content for the cancel button | `'cancel'`
 | modalClass | Bootstrap class that determines icon and confirm button color | `'danger'`
 
-#### Options interface
+#### IConfirmationModalOptions interface
 ```ts
-interface ModalOptions {
+interface IConfirmationModalOptions {
     iconSize?: number,
     confirmBtnText?: string;
     cancelBtnText?: string;
@@ -215,7 +215,7 @@ interface Props {
     id: string;
     prompt?: string;
     icon?: string;
-    options?: ModalOptions;
+    options?: IInfoModalOptions;
 }
 ```
 
@@ -227,7 +227,7 @@ interface Props {
 | modalClass | Bootstrap class that determines icon and confirm button color | `'danger'`
 | staticBackdrop  | No      | Backdrop click will close the modal if set to `true` | `true`
 
-#### Options interface
+#### IInfoModalOptions interface
 ```ts
 interface ModalOptions {
     iconSize?: number,
@@ -254,4 +254,4 @@ The `modal-opened` and the `modal-closed` events are also fired when the compone
 
 * **The `data-bs-dismiss="modal"` attribute is required for the close button**
 
-    If you're creating a custom modal using the `<AppModal/>` component, be sure to include the aforemention attribute in your close button as demonstrated above
+    If you're creating a custom modal using the `<AppModal/>` component, be sure to include the aforementioned attribute in your close button as demonstrated above
