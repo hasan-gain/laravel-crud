@@ -26,19 +26,13 @@
 
 <script setup lang="ts">
 import AppModal from './index.vue';
+import type { IConfirmationModalOptions } from './types';
  
-interface ModalOptions {
-    iconSize?: number,
-    confirmBtnText?: string;
-    cancelBtnText?: string;
-    modalClass?: 'primary' | 'danger' | 'success' | 'warning' | 'info',
-}
-
 interface Props {
     id: string;
     prompt?: string;
     icon?: string;
-    options?: ModalOptions;
+    options?: IConfirmationModalOptions;
 }
 
 const props = defineProps<Props>();

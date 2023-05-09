@@ -155,39 +155,17 @@
             </div>
         </div>
     </div>
-
-    <InfoModal
-        id="my-modal-id"
-        v-if="showModal"
-        @modal-closed="showModal = false"
-        :options="{modalClass: 'info', btnText: $t('Understood'), staticBackdrop: false}"
-    />
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from "../../store/auth";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
-// import AppInput from '@/lib/components/input/index.vue'
-// import AppModal from '@/lib/components/modal/index.vue'
-import ConfirmationModal from "@/lib/components/modal/ConfirmationModal.vue";
-import Modal from "@/lib/components/modal/Modal.vue";
-import AppModal from "@/lib/components/modal/index.vue";
-import InfoModal from "@/lib/components/modal/InfoModal.vue";
 import FormInput from "@/lib/components/input/FormInput.vue";
 const authStore = useAuthStore();
 const { loading } = storeToRefs(authStore);
 
 const showModal = ref<boolean>(true);
-
-const handleConfirm = (): void => {
-    alert("Confirm");
-    showModal.value = false;
-};
-const handleCancelled = (): void => {
-    alert("Cancel");
-    showModal.value = false;
-};
 
 const submit = (event) => {
     // emailErrMsg.value = '';

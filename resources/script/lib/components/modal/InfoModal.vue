@@ -27,19 +27,13 @@
 
 <script setup lang="ts">
 import AppModal from './index.vue';
+import type { IInfoModalOptions } from './types';
  
-interface ModalOptions {
-    iconSize?: number,
-    btnText?: string;
-    modalClass?: 'primary' | 'danger' | 'success' | 'warning' | 'info',
-    staticBackdrop?: boolean
-}
-
 interface Props {
     id: string;
     prompt?: string;
     icon?: string;
-    options?: ModalOptions;
+    options?: IInfoModalOptions;
 }
 
 const props = defineProps<Props>();
