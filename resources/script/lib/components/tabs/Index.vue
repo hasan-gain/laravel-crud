@@ -1,36 +1,16 @@
 <template>
-    <div class="hover-scroll-x">
-        <div class="d-grid">
-            <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x fs-6 flex-nowrap text-nowrap">
-                <li class="nav-item" v-for="(tab, index) in tabs" :key="`tab-${options.tabId}-item-${index}`"
-                    data-bs-toggle="tab" role="tab" :aria-selected="tab.name === selectedTab?.name">
-                    <button class="nav-link btn"
-                        :class="`${tab.name === selectedTab?.name ? 'active' : ''} ${tab.class ? tab.class : 'btn-color-gray-600 btn-active-color-primary rounded-bottom-0 m-0 btn-active-light bg-secondary'}`"
-                        @click="selectedTab = tab">
-                        {{ tab.tabTitle || tab.name }}
-                    </button>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <slot></slot>
+    <vertical-tab v-if="options.alignment === 'vertical'" :options="options" />
+    <horizontal-tab v-else :options="options" />
 </template>
 <script setup lang="ts">
-import { ref, provide, onMounted, watch } from 'vue'
-import type { ITabOptions, ITabItem } from "@/lib/components/tabs"
+import type { ITabOptions } from "@/lib/components/tabs"
+
+// components
+import HorizontalTab from './horizontal/Tabs.vue'
+import VerticalTab from './vertical/Tabs.vue'
 interface Props {
     options: ITabOptions
 }
 const props = defineProps<Props>()
-const tabs = ref(props.options.tabs)
-const selectedTab = ref<ITabItem>()
-provide('selectedTab', selectedTab)
-watch(() => selectedTab.value, (n: any, o: any) => {
-    if (o?.out) o.out()
-    if (n?.in) n.in()
-})
-onMounted(() => {
-    selectedTab.value = props.options.tabs[0]
-})
 </script>
 

@@ -1,8 +1,6 @@
 <template>
-    <div v-if="tab.name === selectedTab?.name" class="card bg-transparent border-0">
-        <div class="card-body">
-            <slot></slot>
-        </div>
+    <div v-if="tab.name === selectedTab?.name" class="card card-body bg-transparent border-0" :class="tab.bodyClass">
+        <slot></slot>
     </div>
 </template>
 

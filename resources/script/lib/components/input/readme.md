@@ -1,5 +1,5 @@
 # Input [@/lib/input/index.vue]
-- Use
+Use
 ```
 <script setup lang="ts">
 import { reactive } from 'vue'
@@ -39,35 +39,34 @@ const invalid = (name?) => {
 
 
 ```
-- Props
-    - type: [required] 'text' | 'password' | 'email' | 'number' | 'search' | 'radio' | 'select' | 'checkbox' | 'switch' | 'textarea' | 'file' | 'image-uploader'
-    - id?: string
-    - name?: string
-    - autocomplete?: string
-    - readonly?: boolean
-    - disabled?: boolean
-    - placeholder?: string
-    - required?: boolean
-    - inputClass?: string
-    - maxlength?: number 
-    - minlength?: number
-    - options?: InputOption
-        - errorClass?: string (only impacts client side validation)
-        - showPasswordEye?: boolean (use only for password type)
-        - errorMessage?: string (custom error message for client side validation)
-    - list?: InputListItem[] (only use for 'radio' | 'select' | 'checkbox')
-    - textAreaCols?: number
-    - textAreaRows?: number
-    - listValueField?: string
-    - labelClass?: string
-    - label?: string
-    - error?: string
-    - multiple?: boolean
+Props:
+- type: [required] 'text' | 'password' | 'email' | 'number' | 'search' | 'radio' | 'select' | 'checkbox' | 'switch' | 'textarea' | 'file' | 'image-uploader'
+- id?: string
+- name?: string
+- autocomplete?: string
+- readonly?: boolean
+- disabled?: boolean
+- placeholder?: string
+- required?: boolean
+- inputClass?: string
+- maxlength?: number 
+- minlength?: number
+- options?: InputOption
+    - errorClass?: string (only impacts client side validation)
+    - showPasswordEye?: boolean (use only for password type)
+    - errorMessage?: string (custom error message for client side validation)
+- list?: InputListItem[] (only use for 'radio' | 'select' | 'checkbox')
+- textAreaCols?: number
+- textAreaRows?: number
+- listValueField?: string
+- labelClass?: string
+- label?: string
+- error?: string
+- multiple?: boolean
 
-- Metods
-    - v-modal (formdata two way binding)
-    - @change (use )
-    - 
+Metods:
+- v-modal (formdata two way binding)
+- @change (use )
     
 Note:
 ````
